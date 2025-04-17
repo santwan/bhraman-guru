@@ -1,2 +1,12 @@
-# bhraman-gurugiv
- 🌍 BhramanGuru – Your AI-Powered Travel Companion BhramanGuru is an intelligent AI-powered travel planner that helps users effortlessly plan personalized trips based on preferences, budgets, timeframes, and destinations. It aims to simplify the travel planning experience using cutting-edge AI and automation.  🚀 Features ✈️ Smart Itinerary Generator – Generates day-wise plans based on location, travel time, and interests  📍 AI-Powered Destination Suggestions – Recommends places using user mood, weather, and season data  🧠 Chat-based Travel Assistant – Ask questions and get real-time travel guidance  📆 Dynamic Scheduling – Auto-adjusts plan based on user time constraints  💰 Budget Estimator – Provides cost breakdowns for travel, stay, and activities  📸 Location Preview – Shows images, maps, and ratings of recommended spots  🌐 Multilingual Support – Travel anywhere, language no bar         
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
