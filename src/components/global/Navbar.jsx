@@ -7,10 +7,10 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navConfig = [
-    { label: "Cohorts", href: "#", isLive: true },
-    { label: "Udemy", href: "#", isLive: false },
-    { label: "Docs", href: "#", isLive: false },
-    { label: "Reviews", href: "#", isLive: true },
+    { label: "Destinations", href: "#", isLive: false },
+    { label: "Plan Trip", href: "#", isLive: false },
+    { label: "Blog", href: "#", isLive: false },
+    { label: "Reviews", href: "#", isLive: false },
   ];
 
 
@@ -29,7 +29,7 @@ const Navbar = () => {
           scrolled ? "h-0 bg-transparent" : "h-auto bg-[#28104E] border-b border-purple-100/10"
         }`}
       >
-        <div className="max-w-[1500px] mx-auto px-4 py-6 sm:py-8 flex justify-between items-center">
+        <div className="max-w-[1500px] mx-auto px-4 sm:py-8 flex justify-between items-center">
           {/* Logo */}
           <div
             className={`transition-opacity duration-500 ${
@@ -39,13 +39,13 @@ const Navbar = () => {
             <img
               src=""
               alt="Logo"
-              className="h-9 md:h-12"
+              className="text-shadow-indigo-200 h-0 md:h-0"
             />
           </div>
 
           {/* Center Nav */}
           <div
-            className={`hidden sm:flex space-x-8 text-[#d6c9eb] text-base font-semibold transition-opacity duration-500 ${
+            className={`hidden sm:flex space-x-4 text-[#eee3ff] text-base font-semibold transition-opacity duration-500 ${
               scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
           >
@@ -53,7 +53,7 @@ const Navbar = () => {
               <a
                 key={label}
                 href={href}
-                className="lg:text-xl relative flex items-center px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_4px_rgba(151,84,203,0.5)]"
+                className="lg:text-lg relative flex items-center px-4 py-2 rounded-full transition-all duration-200 transform hover:scale-110 hover:shadow-[0_0_15px_4px_rgba(151,84,203,0.5)]"
               >
                 {label}
                 {isLive && (
@@ -69,7 +69,7 @@ const Navbar = () => {
               scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
           >
-            <button className="text-xl px-6 py-2 rounded-full font-bold text-white bg-gradient-to-r from-[#6237A0] via-[#9754CB] to-[#DEACF5] hover:from-[#6237A0] hover:to-[#DEACF5] shadow-md hover:shadow-xl ring-1 ring-[#9754CB]/50 hover:scale-110 transition-all duration-300 ease-in-out">
+            <button className="text-lg px-8 py-2 rounded-full font-bold text-white bg-gradient-to-r from-[#6237A0] via-[#9754CB] to-[#DEACF5] hover:from-[#6237A0] hover:to-[#DEACF5] shadow-md hover:shadow-xl ring-1 ring-[#9754CB]/50 hover:scale-110 transition-all duration-300 ease-in-out">
               Login
             </button>
           </div>
