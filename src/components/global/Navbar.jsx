@@ -27,7 +27,7 @@ const Navbar = () => {
         className={`fixed top-0 w-full z-50 transition-all duration-500 ${
           scrolled
             ? "h-0 bg-transparent"
-            : "h-auto bg-teal-900 "
+            : "h-auto bg-emerald-600 "
         }`}
       >
         <div className="max-w-[1500px] mx-auto px-4 sm:py-8 flex justify-between items-center">
@@ -54,7 +54,7 @@ const Navbar = () => {
               <a
                 key={label}
                 href={href}
-                className=" relative flex items-center px-3 rounded-full transition-all duration-200 transform hover:scale-110 hover:shadow-[0_0_15px_4px_rgba(249,199,79,0.5)]"
+                className="lg:text-lg relative flex items-center px-4 py-2 rounded-full transition-all duration-200 transform hover:scale-110 hover:shadow-[0_0_15px_4px_rgba(249,199,79,0.5)]"
               >
                 {label}
                 {isLive && (
@@ -70,7 +70,7 @@ const Navbar = () => {
               scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
           >
-            <button className=" px-8 bg-[#F9C74F] rounded-3xl font-semibold text-black shadow-md hover:shadow-xl ring-1 ring-[#F9C74F]/50 hover:scale-110 transition-all duration-300 ease-in-out">
+            <button className="text-lg px-8 py-2 rounded-xl font-bold text-white shadow-md hover:shadow-xl ring-1 ring-[#F9C74F]/50 hover:scale-110 transition-all duration-300 ease-in-out">
               Login
             </button>
           </div>
