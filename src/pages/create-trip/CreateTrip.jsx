@@ -19,7 +19,9 @@ function CreateTrip() {
                     apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
                     selectProps={{
                         place,
-                        onChange:(v)=>{setPlace(v); console.log(v)}
+                        onChange: (v) => { setPlace(v); console.log(v); },
+                        placeholder: "Search your destination...",
+                        isClearable: true
                     }}
                 />
             </div>
