@@ -6,6 +6,7 @@ import {
     PiggyBank,
     Wallet,
     Gem,
+    PartyPopper
 } from 'lucide-react';
   
 export const SelectTravelList = [
@@ -34,12 +35,12 @@ export const SelectTravelList = [
       id: 4,
       title: 'Friends',
       desc: 'A bunch of thrill seekers',
-      icon: Glasses, // 😎
+      icon: PartyPopper, // 😎
       people: '5 to 10 people',
     },
   ];
   
-  export const SelectBudgetOptions = [
+export const SelectBudgetOptions = [
     {
       id: 1,
       title: 'Cheap',
