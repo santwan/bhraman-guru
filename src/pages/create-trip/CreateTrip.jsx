@@ -3,11 +3,13 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import Input from '../../components/Input.jsx';
 import { SelectBudgetOptions, SelectTravelList } from '../../constants/option.jsx';
 import { toast } from 'sonner';
+import { generateTravelPlan } from '../../services/AIModel.jsx'; // Adjust path accordingly
 
 function CreateTrip() {
     const [place, setPlace] = useState();
     const [formData, setFormData] = useState({});
     const [loading, setLoading] = useState(false);
+    const [tripPlan, setTripPlan] = useState(null); // store response
 
     const handleInputChange = (name, value) => {
         if (name === 'noOfDays' && value > 15) {
@@ -26,30 +28,38 @@ function CreateTrip() {
 
     const onGenerateTrip = async () => {
         if (!formData?.noOfDays || !formData?.location || !formData?.budget || !formData?.traveler) {
-            toast("Please Fill all the details");
-            if (formData.noOfDays > 15) {
-                toast("Enter Travel Days less than 15");
-            }
-            return;
+          toast("Please Fill all the details");
+          return;
         }
-
-        // Add your trip generation logic here
-        setLoading(true);
-
-        // Example async logic for generating the trip
+      
+        if (formData.noOfDays > 15) {
+          toast("Enter Travel Days less than 15");
+          return;
+        }
+      
         try {
-            // Simulate an API call or process
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            toast("Trip generated successfully!");
-        } catch (error) {
-            toast("Error generating trip");
+          setLoading(true);
+          const location = formData.location?.label || formData.location; // use .label if coming from GooglePlacesAutocomplete
+          const plan = await generateTravelPlan({
+            location,
+            noOfDays: formData.noOfDays,
+            traveler: formData.traveler,
+            budget: formData.budget,
+          });
+      
+          console.log("Generated Trip Plan:", plan);
+          //setTripPlan(JSON.parse(plan)); // store parsed response
+          toast("Trip plan generated!");
+        } catch (err) {
+          console.error(err);
+          toast("Something went wrong while generating the trip.");
         } finally {
-            setLoading(false);
+          setLoading(false);
         }
     };
 
     return (
-        <div className='sm:px-10 md:px-32 lg:px-56 xl:px-10 px-5 mt-10'>
+        <div className='sm:px-10 md:px-32 lg:px-56 xl:px-60 px-5 pt-25 mt-10'>
             <h2 className='text-3xl font-sans font-bold mb-3'>Tell us your Travel preferences</h2>
             <p className='max-w-fit'>
                 Just provide some basic information, and our trip planner will generate a customized itinerary based on your preferences.
