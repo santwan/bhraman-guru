@@ -1,10 +1,11 @@
 import './App.css'
+import Home from './pages/home/Home.jsx'
 
 function App() {
 
   return (
-    <div className='"min-h-screen bg-white text-black dark:bg-black dark:text-white transition-colors duration-300"'>
-    <h1>Hello</h1>
+    <div>
+      <Home></Home>
     </div>
   )
 }
