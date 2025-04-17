@@ -5,7 +5,7 @@ import Input from '../../components/Input.jsx';
 import { SelectBudgetOptions, SelectTravelList } from '../../constants/option.jsx';
 
 function CreateTrip() {
-    const [place,setPlace]=useState();
+    const [place,setPlace] = useState();
 
     const [formData,setFormData]=useState([]);
 
@@ -15,7 +15,7 @@ function CreateTrip() {
 
     const handleInputChange = (name,value) => {
 
-        if(name=='noOfDays' && value>15){
+        if(name == 'noOfDays' && value>15){
             toast("Please enter Trip days Less than 15")
         }
     
@@ -27,13 +27,51 @@ function CreateTrip() {
     
     useEffect(()=>{
         console.log(formData);
-      },[formData])
+    },[formData])
     
-      const login=useGoogleLogin({
+    const login=useGoogleLogin({
         onSuccess:(codeResponse)=>GetUserProfile(codeResponse),
         onError:(error)=>console.log(error)
     })
     
+
+    const onGenerateTrip = async () => {
+
+        if(!formData?.noOfDays || !formData?.location||!formData?.budget||!formData?.traveler)
+            {   
+                toast("Please Fill all the details")
+                if(formData.noOfDays>15)
+                    {
+                        toast("Enter Travel Days less than 15")
+                    }
+                return;
+            }
+    
+        const user=localStorage.getItem('user');
+    
+        if(!user)
+        {   
+            setOpenDailog(true)
+            return;
+        }
+    
+        setLoading(true);
+        
+        const FINAL_PROMPT=AI_PROMPT
+        .replace('{location}',formData?.location?.label)
+        .replace('{noOfDays}',formData?.noOfDays)
+        .replace('{traveler}',formData?.traveler)
+        .replace('{budget}',formData?.budget)
+        .replace('{noOfDays}',formData?.noOfDays)
+    
+        // console.log(FINAL_PROMPT);
+    
+        const result=await chatSession.sendMessage(FINAL_PROMPT);
+    
+        console.log("--",result?.response?.text());
+        setLoading(false);
+        SaveAiTrip(result?.response?.text());
+      }
 
   return (
     <div className='sm:px-10 md:px-32 lg:px-56 xl:px-10 px-5 mt-10'>
@@ -77,8 +115,12 @@ function CreateTrip() {
                 const Icon = item.icon;
                 return (
                     <div
-                    key={index}
-                    className="p-2 border cursor-pointer rounded-lg hover:shadow-lg"
+                    key = {index}
+                    onClick = { () => handleInputChange('budget', item.title)} 
+                    className = {`
+                            p-2 border cursor-pointer rounded-lg hover:shadow-lg
+                            ${ formData?.budget == item.title && 'shadow-lg border-black' }
+                        `}
                     >
                     <Icon className="w-8 h-8 text-red-600" />
                     <h2 className="font-medium">{item.title}</h2>
@@ -99,9 +141,11 @@ function CreateTrip() {
                         <div
                         key={index}
                         onClick={() => handleInputChange('traveler', item.people)}
-                        className=
-                            "p-2 border cursor-pointer rounded-lg hover:shadow-lg transition-all"
-                        >
+                        className={`
+                            p-2 border cursor-pointer rounded-lg hover:shadow-lg
+                            ${formData?.traveler == item.people && 'shadow-lg border-black'}
+                        `}>
+    
                         <Icon className='w-8 h-8 text-indigo-600 mb-1' />
                         <h2 className='font-medium'>{item.title}</h2>
                         <h2 className='text-xs text-gray-500'>{item.desc}</h2>
