@@ -7,6 +7,34 @@ import { SelectBudgetOptions, SelectTravelList } from '../../constants/option.js
 function CreateTrip() {
     const [place,setPlace]=useState();
 
+    const [formData,setFormData]=useState([]);
+
+    const [openDailog,setOpenDailog]=useState(false);
+
+    const [loading,setLoading] = useState(false);
+
+    const handleInputChange = (name,value) => {
+
+        if(name=='noOfDays' && value>15){
+            toast("Please enter Trip days Less than 15")
+        }
+    
+        setFormData({
+            ...formData,
+            [name]:value
+        })
+    }
+    
+    useEffect(()=>{
+        console.log(formData);
+      },[formData])
+    
+      const login=useGoogleLogin({
+        onSuccess:(codeResponse)=>GetUserProfile(codeResponse),
+        onError:(error)=>console.log(error)
+    })
+    
+
   return (
     <div className='sm:px-10 md:px-32 lg:px-56 xl:px-10 px-5 mt-10'>
         <h2 className='text-3xl font-sans font-bold mb-3'>Tell us your Travel preferences</h2>
@@ -21,7 +49,7 @@ function CreateTrip() {
                     apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
                     selectProps={{
                         place,
-                        onChange: (v) => { setPlace(v); console.log(v); },
+                        onChange: (v) => { setPlace(v); handleInputChange("location"), v },
                         placeholder: "Search your destination...",
                         isClearable: true
                     }}
