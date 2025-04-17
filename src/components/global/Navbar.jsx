@@ -1,0 +1,154 @@
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+
+const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const navConfig = [
+    { label: "Cohorts", href: "#", isLive: true },
+    { label: "Udemy", href: "#", isLive: false },
+    { label: "Docs", href: "#", isLive: false },
+    { label: "Reviews", href: "#", isLive: true },
+  ];
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <>
+      <nav
+        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+          scrolled ? "h-0 bg-transparent" : "h-auto bg-[#28104E] border-b border-purple-100/10"
+        }`}
+      >
+        <div className="max-w-[1500px] mx-auto px-4 py-6 sm:py-8 flex justify-between items-center">
+          {/* Logo */}
+          <div
+            className={`transition-opacity duration-500 ${
+              scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
+          >
+            <img
+              src=""
+              alt="Logo"
+              className="h-9 md:h-12"
+            />
+          </div>
+
+          {/* Center Nav */}
+          <div
+            className={`hidden sm:flex space-x-8 text-[#d6c9eb] text-base font-semibold transition-opacity duration-500 ${
+              scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
+          >
+            {navConfig.map(({ label, href, isLive }) => (
+              <a
+                key={label}
+                href={href}
+                className="lg:text-xl relative flex items-center px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_4px_rgba(151,84,203,0.5)]"
+              >
+                {label}
+                {isLive && (
+                  <span className="ml-2 h-2 w-2 rounded-full bg-green-400 animate-pulse shadow-md"></span>
+                )}
+              </a>
+            ))}
+          </div>
+
+          {/* Right Section */}
+          <div
+            className={`hidden sm:flex items-center space-x-3 transition-opacity duration-500 ${
+              scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
+          >
+            <button className="text-xl px-6 py-2 rounded-full font-bold text-white bg-gradient-to-r from-[#6237A0] via-[#9754CB] to-[#DEACF5] hover:from-[#6237A0] hover:to-[#DEACF5] shadow-md hover:shadow-xl ring-1 ring-[#9754CB]/50 hover:scale-110 transition-all duration-300 ease-in-out">
+              Login
+            </button>
+          </div>
+
+          {/* Mobile Hamburger */}
+          <div
+            className={`sm:hidden z-50 transition-opacity duration-500 ${
+              scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
+          >
+            <button onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? (
+                <X className="text-[#28104E] dark:text-white" />
+              ) : (
+                <Menu className="text-[#28104E] dark:text-white" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="sm:hidden bg-white dark:bg-[#28104E] px-4 pb-4 text-[#28104E] dark:text-white flex flex-col space-y-4"
+            >
+              <a href="#" onClick={() => setMenuOpen(false)}>
+                Login
+              </a>
+              {navConfig.map(({ label, href, isLive }) => (
+                <a
+                  key={label}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center"
+                >
+                  {label}
+                  {isLive && (
+                    <span className="ml-2 h-2 w-2 rounded-full bg-green-400 animate-pulse shadow-md"></span>
+                  )}
+                </a>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+
+      {/* Floating Nav */}
+      <AnimatePresence>
+        {scrolled && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed top-3 left-1/2 transform -translate-x-1/2 z-50 bg-[#DEACF5]/70 dark:bg-[#28104E]/70 backdrop-blur-md px-4 py-2 rounded-full shadow-lg 
+              flex flex-row items-center justify-center space-x-6 text-[#28104E] dark:text-white text-sm font-medium 
+              whitespace-nowrap overflow-x-auto w-auto max-w-[90vw] sm:max-w-fit"
+          >
+            {navConfig.map(({ label, href, isLive }) => (
+              <a
+                key={label}
+                href={href}
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center"
+              >
+                {label}
+                {isLive && (
+                  <span className="ml-2 h-2 w-2 rounded-full bg-green-400 animate-pulse shadow-md"></span>
+                )}
+              </a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default Navbar;
