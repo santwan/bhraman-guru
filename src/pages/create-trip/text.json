@@ -1,0 +1,288 @@
+{
+    "tripDetails": {
+      "destination": "Kolkata, West Bengal, India",
+      "noOfDays": 3,
+      "numberOfTravelers": 1,
+      "budget": "Luxury"
+    },
+    "hotelOptions": [
+      {
+        "hotelName": "The Oberoi Grand Kolkata",
+        "hotelAddress": "15, Jawaharlal Nehru Rd, New Market Area, Dharmatala, Taltala, Kolkata, West Bengal 700013",
+        "price": "Approx. ₹15,000+ per night",
+        "hotelImageUrl": "https://media-cdn.tripadvisor.com/media/photo-s/2c/18/72/1c/exterior.jpg",
+        "geoCoordinates": {
+          "latitude": "22.5613",
+          "longitude": "88.3516"
+        },
+        "rating": "4.7/5",
+        "description": "An iconic heritage hotel known as the 'Grande Dame of Chowringhee'. Offers luxurious rooms, fine dining, a spa, and an outdoor pool in a central location."
+      },
+      {
+        "hotelName": "Taj Bengal Kolkata",
+        "hotelAddress": "34-B, Belvedere Rd, Alipore, Kolkata, West Bengal 700027",
+        "price": "Approx. ₹12,000+ per night",
+        "hotelImageUrl": "https://media-cdn.tripadvisor.com/media/photo-s/11/f4/e9/77/taj-bengal.jpg",
+        "geoCoordinates": {
+          "latitude": "22.5383",
+          "longitude": "88.3429"
+        },
+        "rating": "4.6/5",
+        "description": "Located in the plush Alipore area, offering elegant rooms, multiple award-winning restaurants, lush gardens, and proximity to key landmarks like Victoria Memorial and the Zoo."
+      },
+      {
+        "hotelName": "ITC Royal Bengal, a Luxury Collection Hotel, Kolkata",
+        "hotelAddress": "1, JBS Haldane Ave, Tangra, Kolkata, West Bengal 700046",
+        "price": "Approx. ₹14,000+ per night",
+        "hotelImageUrl": "https://media-cdn.tripadvisor.com/media/photo-s/1a/6d/f3/10/exterior.jpg",
+        "geoCoordinates": {
+          "latitude": "22.5439",
+          "longitude": "88.3974"
+        },
+        "rating": "4.7/5",
+        "description": "A modern luxury hotel adjacent to ITC Sonar, featuring grand architecture, sophisticated rooms, state-of-the-art amenities, and highly acclaimed dining options."
+      },
+      {
+        "hotelName": "JW Marriott Hotel Kolkata",
+        "hotelAddress": "4A, JBS Haldane Ave, Tangra, Kolkata, West Bengal 700046",
+        "price": "Approx. ₹13,000+ per night",
+        "hotelImageUrl": "https://media-cdn.tripadvisor.com/media/photo-s/2c/4d/a7/0d/jw-marriott-hotel-kolkata.jpg",
+        "geoCoordinates": {
+          "latitude": "22.5435",
+          "longitude": "88.3963"
+        },
+        "rating": "4.6/5",
+        "description": "Offers contemporary luxury with spacious rooms, a rooftop pool, diverse culinary experiences, and extensive event spaces, located near the EM Bypass."
+      },
+      {
+        "hotelName": "Hyatt Regency Kolkata",
+        "hotelAddress": "JA-1, JA Block, Sector III, Bidhannagar, Kolkata, West Bengal 700098",
+        "price": "Approx. ₹10,000+ per night",
+        "hotelImageUrl": "https://media-cdn.tripadvisor.com/media/photo-s/1d/80/a6/6c/hyatt-regency-kolkata.jpg",
+        "geoCoordinates": {
+          "latitude": "22.5786",
+          "longitude": "88.4074"
+        },
+        "rating": "4.5/5",
+        "description": "Situated in the Salt Lake City area, known for its landscaped gardens, large outdoor pool, excellent dining, and proximity to the airport and IT hub."
+      }
+    ],
+    "dailyItinerary": [
+      {
+        "day": 1,
+        "bestTimeToVisit": "October to March",
+        "theme": "Colonial Grandeur & Cultural Introduction",
+        "schedule": [
+          {
+            "placeName": "Victoria Memorial Hall",
+            "placeDetails": "An iconic white marble monument and museum built in memory of Queen Victoria. Surrounded by lush gardens, it's a symbol of Kolkata's colonial past.",
+            "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Victoria_Memorial_Hall_Kolkata_India.jpg/1280px-Victoria_Memorial_Hall_Kolkata_India.jpg",
+            "geoCoordinates": {
+              "latitude": "22.5448",
+              "longitude": "88.3426"
+            },
+            "ticketPricing": "Garden: ₹20, Museum: ₹30 (Indians), ₹500 (Foreigners)",
+            "rating": "4.6/5",
+            "estimatedTimeSpent": "2-3 hours",
+            "travelTimeFromPrevious": "Approx. 15-20 mins drive from Oberoi Grand/Taj Bengal"
+          },
+          {
+            "placeName": "St. Paul's Cathedral",
+            "placeDetails": "An Anglican cathedral noted for its Indo-Gothic architecture, serene ambiance, and beautiful stained glass windows. Located very close to Victoria Memorial.",
+            "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/St._Paul%27s_Cathedral%2C_Kolkata_04.jpg/1024px-St._Paul%27s_Cathedral%2C_Kolkata_04.jpg",
+            "geoCoordinates": {
+              "latitude": "22.5432",
+              "longitude": "88.3460"
+            },
+            "ticketPricing": "Free entry",
+            "rating": "4.5/5",
+            "estimatedTimeSpent": "30-45 minutes",
+            "travelTimeFromPrevious": "Approx. 5 mins walk"
+          },
+          {
+            "placeName": "Indian Museum",
+            "placeDetails": "The oldest and one of the largest museums in India, housing rare collections of antiques, armour, ornaments, fossils, skeletons, mummies, and Mughal paintings.",
+            "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Indian_Museum_Building.jpg/1280px-Indian_Museum_Building.jpg",
+            "geoCoordinates": {
+              "latitude": "22.5583",
+              "longitude": "88.3511"
+            },
+            "ticketPricing": "₹50 (Indians), ₹500 (Foreigners)",
+            "rating": "4.3/5",
+            "estimatedTimeSpent": "2-3 hours",
+            "travelTimeFromPrevious": "Approx. 10 mins drive"
+          },
+          {
+            "placeName": "Park Street (Mother Teresa Sarani)",
+            "placeDetails": "Famous thoroughfare known for its vibrant nightlife, historic restaurants, pubs, and colonial-era buildings. Ideal for an evening stroll and dinner.",
+            "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Park_Street_Night_View.jpg/1280px-Park_Street_Night_View.jpg",
+            "geoCoordinates": {
+              "latitude": "22.5544",
+              "longitude": "88.3548"
+            },
+            "ticketPricing": "N/A",
+            "rating": "4.4/5",
+            "estimatedTimeSpent": "Evening (Dinner + Exploration)",
+            "travelTimeFromPrevious": "Approx. 5 mins drive"
+          },
+          {
+            "placeName": "Dinner at Iconic Park Street Restaurant",
+            "placeDetails": "Experience classic Kolkata dining at heritage restaurants like Mocambo, Peter Cat (famous for Chelo Kebab), or Trincas (known for live music).",
+            "placeImageUrl": "https://media-cdn.tripadvisor.com/media/photo-s/1a/67/9e/3e/photo0jpg.jpg",
+            "geoCoordinates": {
+              "latitude": "22.5544",
+              "longitude": "88.3548"
+            },
+            "ticketPricing": "Varies (Luxury Budget)",
+            "rating": "4.2-4.5/5 (Varies by restaurant)",
+            "estimatedTimeSpent": "1.5-2 hours",
+            "travelTimeFromPrevious": "Walking distance on Park Street"
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "bestTimeToVisit": "October to March",
+        "theme": "Spiritual Journey & Artistic Heritage",
+        "schedule": [
+          {
+            "placeName": "Dakshineswar Kali Temple",
+            "placeDetails": "A revered Hindu temple dedicated to Goddess Kali, located on the eastern bank of the Hooghly River. Famous for its association with Ramakrishna Paramahamsa.",
+            "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Dakshineswar_Temple_From_Vivekananda_Setu_2.jpg/1024px-Dakshineswar_Temple_From_Vivekananda_Setu_2.jpg",
+            "geoCoordinates": {
+              "latitude": "22.6549",
+              "longitude": "88.3580"
+            },
+            "ticketPricing": "Free entry (Donations accepted, special puja charges apply)",
+            "rating": "4.7/5",
+            "estimatedTimeSpent": "1.5-2 hours",
+            "travelTimeFromPrevious": "Approx. 45-60 mins drive from central Kolkata hotels"
+          },
+          {
+            "placeName": "Belur Math",
+            "placeDetails": "Headquarters of the Ramakrishna Math and Mission, founded by Swami Vivekananda. Known for its unique architecture symbolizing unity of religions and serene atmosphere on the Hooghly's west bank.",
+            "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Belur_Math_-_Kolkata.jpg/1280px-Belur_Math_-_Kolkata.jpg",
+            "geoCoordinates": {
+              "latitude": "22.6298",
+              "longitude": "88.3548"
+            },
+            "ticketPricing": "Free entry",
+            "rating": "4.7/5",
+            "estimatedTimeSpent": "1-1.5 hours",
+            "travelTimeFromPrevious": "Approx. 15 mins drive or ferry ride across the river"
+          },
+          {
+            "placeName": "Kumartuli",
+            "placeDetails": "The traditional potters' quarter renowned for crafting intricate clay idols of gods and goddesses, especially for Durga Puja. Fascinating to watch artisans at work.",
+            "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Potter%27s_Colony%2C_Kumortuli%2C_Kolkata_%2816051851872%29.jpg/1024px-Potter%27s_Colony%2C_Kumortuli%2C_Kolkata_%2816051851872%29.jpg",
+            "geoCoordinates": {
+              "latitude": "22.6037",
+              "longitude": "88.3631"
+            },
+            "ticketPricing": "Free (Tip artisans if taking extensive photos/videos)",
+            "rating": "4.4/5",
+            "estimatedTimeSpent": "1 hour",
+            "travelTimeFromPrevious": "Approx. 20 mins drive"
+          },
+          {
+            "placeName": "Jorasanko Thakur Bari (Tagore's House)",
+            "placeDetails": "The ancestral home of the Tagore family, including Nobel laureate Rabindranath Tagore. Now a museum showcasing his life, works, and the Bengal Renaissance.",
+            "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Jorasanko_Thakur_Bari_%28Tagore_House%29_Kolkata_-_West_Bengal_-_India_01.JPG/1280px-Jorasanko_Thakur_Bari_%28Tagore_House%29_Kolkata_-_West_Bengal_-_India_01.JPG",
+            "geoCoordinates": {
+              "latitude": "22.5858",
+              "longitude": "88.3622"
+            },
+            "ticketPricing": "₹30 (Indians), Light & Sound Show extra",
+            "rating": "4.5/5",
+            "estimatedTimeSpent": "1.5-2 hours",
+            "travelTimeFromPrevious": "Approx. 10 mins drive from Kumartuli"
+          },
+           {
+            "placeName": "Fine Dining Experience",
+            "placeDetails": "Enjoy dinner at a high-end Bengali specialty restaurant like 'Oh! Calcutta' or '6 Ballygunge Place', or opt for international cuisine at your luxury hotel.",
+            "placeImageUrl": "https://media-cdn.tripadvisor.com/media/photo-s/0f/a3/51/4c/ambiance.jpg",
+            "geoCoordinates": {
+              "latitude": "22.5372",
+              "longitude": "88.3652"
+            },
+            "ticketPricing": "Varies (Luxury Budget)",
+            "rating": "4.4-4.6/5 (Varies by restaurant)",
+            "estimatedTimeSpent": "2 hours",
+            "travelTimeFromPrevious": "Approx. 20-30 mins drive depending on location"
+          }
+        ]
+      },
+      {
+        "day": 3,
+        "bestTimeToVisit": "October to March",
+        "theme": "Intellectual Hub, River Views & Shopping",
+        "schedule": [
+          {
+            "placeName": "College Street (Boi Para)",
+            "placeDetails": "Asia's largest second-hand book market, stretching for almost a mile. A haven for bibliophiles, also home to prestigious educational institutions.",
+            "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/College_Street_Book_Market%2C_Kolkata_01.jpg/1024px-College_Street_Book_Market%2C_Kolkata_01.jpg",
+            "geoCoordinates": {
+              "latitude": "22.5746",
+              "longitude": "88.3630"
+            },
+            "ticketPricing": "N/A (Cost of books)",
+            "rating": "4.5/5",
+            "estimatedTimeSpent": "1.5-2 hours (including Coffee House)",
+            "travelTimeFromPrevious": "Approx. 20-25 mins drive from central Kolkata hotels"
+          },
+          {
+            "placeName": "Indian Coffee House",
+            "placeDetails": "An iconic and historic cafe on College Street, once a meeting place for intellectuals, artists, and students. Famous for its 'adda' culture and old-world charm.",
+            "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Indian_Coffee_House%2C_Kolkata_%2814329746591%29.jpg/1024px-Indian_Coffee_House%2C_Kolkata_%2814329746591%29.jpg",
+            "geoCoordinates": {
+              "latitude": "22.5742",
+              "longitude": "88.3642"
+            },
+            "ticketPricing": "Pay for food/drinks (Very affordable)",
+            "rating": "4.2/5",
+            "estimatedTimeSpent": "45-60 minutes",
+            "travelTimeFromPrevious": "Walking distance within College Street"
+          },
+          {
+            "placeName": "Howrah Bridge (Rabindra Setu) View",
+            "placeDetails": "One of the world's busiest cantilever bridges and an icon of Kolkata. Best viewed from Mallick Ghat Flower Market or during a ferry ride on the Hooghly River.",
+            "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Howrah_Bridge_-_Kolkata_2012-11-07_1555.JPG/1280px-Howrah_Bridge_-_Kolkata_2012-11-07_1555.JPG",
+            "geoCoordinates": {
+              "latitude": "22.5853",
+              "longitude": "88.3468"
+            },
+            "ticketPricing": "Free (Ferry charges apply)",
+            "rating": "4.6/5",
+            "estimatedTimeSpent": "30-45 minutes (viewing/crossing)",
+            "travelTimeFromPrevious": "Approx. 15 mins drive"
+          },
+          {
+            "placeName": "Prinsep Ghat",
+            "placeDetails": "A beautiful ghat on the Hooghly River with Greek and Gothic architecture, offering stunning sunset views, boat rides, and a popular spot for evening walks.",
+            "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Prinsep_Ghat_Kolkata_at_Evening_03.jpg/1280px-Prinsep_Ghat_Kolkata_at_Evening_03.jpg",
+            "geoCoordinates": {
+              "latitude": "22.5590",
+              "longitude": "88.3347"
+            },
+            "ticketPricing": "Free (Boating charges extra)",
+            "rating": "4.5/5",
+            "estimatedTimeSpent": "1-1.5 hours",
+            "travelTimeFromPrevious": "Approx. 20 mins drive"
+          },
+          {
+            "placeName": "New Market (Sir Stuart Hogg Market)",
+            "placeDetails": "A historic and bustling shopping destination offering everything from clothing, accessories, electronics to food items. Great for souvenir hunting and experiencing local market vibe.",
+            "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/New_Market%2C_Kolkata_%28Main_Entrance%29.jpg/1024px-New_Market%2C_Kolkata_%28Main_Entrance%29.jpg",
+            "geoCoordinates": {
+              "latitude": "22.5600",
+              "longitude": "88.3536"
+            },
+            "ticketPricing": "N/A",
+            "rating": "4.2/5",
+            "estimatedTimeSpent": "1.5-2 hours (Depending on shopping interest)",
+            "travelTimeFromPrevious": "Approx. 10-15 mins drive"
+          }
+        ]
+      }
+    ]
+  }
