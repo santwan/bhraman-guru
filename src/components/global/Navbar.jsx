@@ -7,7 +7,6 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navConfig = [
-    { label: "Destinations", href: "#", isLive: false },
     { label: "Plan Trip", href: "#", isLive: false },
     { label: "Blog", href: "#", isLive: false },
     { label: "Reviews", href: "#", isLive: false },
@@ -27,7 +26,7 @@ const Navbar = () => {
         className={`fixed top-0 w-full z-50 transition-all duration-500 ${
           scrolled
             ? "h-0 bg-transparent"
-            : "h-auto bg-emerald-600 "
+            : "h-auto bg-white "
         }`}
       >
         <div className="max-w-[1500px] mx-auto px-4 sm:py-8 flex justify-between items-center">
@@ -38,15 +37,15 @@ const Navbar = () => {
             }`}
           >
             <img
-              src=""
-              alt="Logo"
-              className="text-shadow-indigo-200 h-0 md:h-0"
+              src="../../public/BhramanGuru.svg"
+              alt="../../public/BhramanGuru.png"
+              className="text-shadow-indigo-200 w-full h-15"
             />
           </div>
 
           {/* Center Nav */}
           <div
-            className={`hidden sm:flex space-x-4 text-[#F2E1C1] text-base font-semibold transition-opacity duration-500 ${
+            className={`hidden sm:flex pr-40 space-x-8 pt-4 text-black text-base font-semibold transition-opacity duration-500 ${
               scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
           >
@@ -70,7 +69,7 @@ const Navbar = () => {
               scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
           >
-            <button className="text-lg px-8 py-2 rounded-xl font-bold text-white shadow-md hover:shadow-xl ring-1 ring-[#F9C74F]/50 hover:scale-110 transition-all duration-300 ease-in-out">
+            <button className="text-lg px-8 py-2 rounded-xl font-bold text-black shadow-md hover:shadow-xl ring-1 ring-[#F9C74F]/50 hover:scale-110 transition-all duration-300 ease-in-out">
               Login
             </button>
           </div>
@@ -129,7 +128,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
             className="fixed top-3 left-1/2 transform -translate-x-1/2 z-50 bg-[#F2E1C1]/70 dark:bg-[#1A4D8F]/70 backdrop-blur-md px-4 py-2 rounded-full shadow-lg 
-              flex flex-row items-center justify-center space-x-6 text-[#1A4D8F] dark:text-[#F2E1C1] text-sm font-medium 
+              flex flex-row items-center justify-center space-x-6 text-[#eaffe0]  text-sm font-medium 
               whitespace-nowrap overflow-x-auto w-auto max-w-[90vw] sm:max-w-fit"
           >
             {navConfig.map(({ label, href, isLive }) => (
