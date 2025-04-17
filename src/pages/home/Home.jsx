@@ -5,7 +5,7 @@ import HeroSection from "../../components/HeroSection.jsx";
 
 const Home = () => {
     return(
-        <div className="h-[200vh] pt-34 bg-amber-300">
+        <div className="h-[200vh] pt-27">
             <HeroSection/>
         </div>
     )
