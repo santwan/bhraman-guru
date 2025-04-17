@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <div className="bg-gradient-to-b from-[#F2E1C1] via-[#ffffff] to-[#F2E1C1]  text-[#3a2601] py-20 px-6 text-center space-y-10">
+    <div className="bg-white  text-[#3a2601] py-20 px-6 text-center space-y-10">
       
       {/* Big Slogan Header */}
       <motion.h1
@@ -41,7 +41,7 @@ const HeroSection = () => {
         className="flex justify-center"
       >
         <Link
-          to="/create-trip"
+          to={"/create-trip"}
           className="gap-1 inline-flex items-center px-12 py-4 text-lg font-bold rounded-xl bg-[#F9C74F] text-[#1A4D8F] hover:bg-[#F6A6A1] hover:text-black active:scale-110 shadow-lg transition-all duration-900"
         >
           Plan Trip
@@ -58,7 +58,7 @@ const HeroSection = () => {
       >
         <div className="aspect-video w-full rounded-xl overflow-hidden shadow-lg">
           <ReactPlayer
-            url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            url="https://www.youtube.com/watch?v=lpJilhkbC9s"
             width="100%"
             height="100%"
             controls={true}
