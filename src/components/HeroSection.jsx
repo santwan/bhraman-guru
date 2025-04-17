@@ -6,16 +6,21 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <div className="bg-gradient-to-br from-[#DEACF5] via-[#9754CB] to-[#6237A0] dark:from-[#28104E] dark:via-[#6237A0] dark:to-[#9754CB] text-white py-20 px-6 text-center space-y-10">
+    <div className="bg-gradient-to-b from-[#F2E1C1] via-[#ffffff] to-[#F2E1C1]  text-[#3a2601] py-20 px-6 text-center space-y-10">
       
       {/* Big Slogan Header */}
       <motion.h1
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight"
+        className="text-4xl sm:text-5xl md:text-5xl font-bold tracking-tight"
       >
-        Discover. Plan. Travel Smart — With BhramanGuru
+        <div className="md:px-25 leading-snug">
+            <p>
+                <span className="text-decoration: underline">BhramanGuru </span>: Your Expert AI Travel Planner
+                <br /> <span className="">and Journey Curator</span>
+            </p>
+        </div>
       </motion.h1>
 
       {/* Subtext */}
@@ -23,9 +28,9 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
-        className="max-w-2xl mx-auto text-lg sm:text-xl font-medium text-white/90"
+        className="max-w-2xl mx-auto text-lg sm:text-xl  text-[#3a2601]/85"
       >
-        Your AI-powered travel companion — turning dream journeys into smart plans.
+        Stop searching, start experiencing. Unlock smart, personalized itineraries and discover secret local spots for truly unforgettable and hassle-free adventures.
       </motion.p>
 
       {/* Plan Trip Button */}
@@ -37,10 +42,10 @@ const HeroSection = () => {
       >
         <Link
           to="/create-trip"
-          className="inline-flex items-center px-8 py-4 text-lg font-semibold rounded-full bg-white text-purple-800 hover:bg-yellow-300 hover:text-black shadow-lg transition-all duration-300"
+          className="gap-1 inline-flex items-center px-12 py-4 text-lg font-bold rounded-xl bg-[#F9C74F] text-[#1A4D8F] hover:bg-[#F6A6A1] hover:text-black active:scale-110 shadow-lg transition-all duration-900"
         >
           Plan Trip
-          <Compass className="ml-3 w-5 h-5" />
+          <Compass className="" />
         </Link>
       </motion.div>
 
@@ -52,12 +57,12 @@ const HeroSection = () => {
         className="max-w-4xl mx-auto rounded-xl overflow-hidden mt-10 shadow-xl"
       >
         <div className="aspect-video w-full rounded-xl overflow-hidden shadow-lg">
-            <ReactPlayer
+          <ReactPlayer
             url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
             width="100%"
             height="100%"
             controls={true}
-            />
+          />
         </div>
       </motion.div>
     </div>
