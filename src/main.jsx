@@ -6,6 +6,17 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import CreateTrip from './pages/create-trip/CreateTrip.jsx'
 import Navbar from './components/global/Navbar.jsx'
 import { Toaster } from "@/components/ui/sonner.jsx"
+import { ClerkProvider } from '@clerk/clerk-react'
+
+// Import your Publishable Key
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+
+// console.log(PUBLISHABLE_KEY)
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
+
 
 const router=createBrowserRouter([
   {
@@ -19,9 +30,12 @@ const router=createBrowserRouter([
 ])
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <Navbar/>
-    <Toaster/>
-    <RouterProvider router={router} />
-  </StrictMode>,
+    <StrictMode>
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+      <Navbar/>
+      <Toaster/>
+      <RouterProvider router={router} />
+      </ClerkProvider>
+    </StrictMode>
+  
 )
