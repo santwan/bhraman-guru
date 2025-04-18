@@ -66,7 +66,7 @@ function CreateTrip() {
         budget: formData.budget,
       });
 
-
+      
       await saveTripToFireStore({
         userId: user.id,
         input: {
