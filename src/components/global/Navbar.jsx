@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import { SignInButton, useUser } from "@clerk/clerk-react";
+import { UserButton, SignedIn, useUser, SignedOut, SignInButton } from "@clerk/clerk-react";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -57,20 +57,17 @@ const Navbar = () => {
 
           {/* Right Section */}
           <div className={`hidden sm:flex items-center space-x-3 transition-opacity duration-500 ${scrolled ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
-            {isSignedIn ? (
-              <Link
-                to="/generate"
-                className="text-lg px-8 py-2 rounded-xl font-bold text-black shadow-md hover:shadow-xl ring-1 ring-[#F9C74F]/50 hover:scale-110 transition-all duration-300 ease-in-out"
-              >
-                Generate Trip
-              </Link>
-            ) : (
-              <SignInButton>
+            <SignedOut>
+              <SignInButton mode="modal">
                 <button className="text-lg px-8 py-2 rounded-xl font-bold text-black shadow-md hover:shadow-xl ring-1 ring-[#F9C74F]/50 hover:scale-110 transition-all duration-300 ease-in-out">
                   Login
                 </button>
               </SignInButton>
-            )}
+            </SignedOut>
+
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
           </div>
 
           {/* Mobile Hamburger */}
