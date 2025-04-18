@@ -6,13 +6,16 @@ import { toast } from 'sonner';
 import { generateTravelPlan } from '../../services/AIModel.jsx';
 import { useUser, SignInButton } from "@clerk/clerk-react";
 import { saveTripToFireStore } from '../../services/firestore.js';
+import { useNavigate } from 'react-router-dom';
 
 function CreateTrip() {
   const [place, setPlace] = useState();
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [tripPlan, setTripPlan] = useState(null);
+  
 
+  const navigate = useNavigate()
   const { isSignedIn, user } = useUser();
   const signInRef = useRef(); // ✅ Ref to trigger sign in
 
@@ -80,6 +83,10 @@ function CreateTrip() {
 
     //   console.log("Generated Trip Plan:", plan);
       toast("Trip plan generated!");
+
+      setTimeout(() => {
+        navigate("/my-trips")
+      }, 1500)
     } catch (err) {
       console.error(err);
       toast("Something went wrong while generating the trip.");
