@@ -7,7 +7,7 @@ export const saveTripToFireStore = async ({userId, input, plan}) => {
         const docRef = await addDoc(collection(db, "trips"), {
             userId,
             input,
-            plan,
+            plan: JSON.parse(plan),
             createdAt: serverTimestamp()
         })
         console.log("Trip saved with ID:", docRef.id)
