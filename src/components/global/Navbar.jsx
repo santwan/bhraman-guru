@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import { UserButton, SignedIn, useUser, SignedOut, SignInButton } from "@clerk/clerk-react";
+import { UserButton, SignedIn, SignedOut, SignInButton, useUser } from "@clerk/clerk-react";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isSignedIn } = useUser();
 
   const navConfig = [
     { label: "Plan Trip", to: "/plan-trip", isLive: false },
@@ -87,13 +86,17 @@ const Navbar = () => {
               exit={{ height: 0, opacity: 0 }}
               className="sm:hidden bg-white px-4 pb-4 text-[#1A4D8F] dark:text-[#F2E1C1] flex flex-col space-y-4"
             >
-              {isSignedIn ? (
-                <Link to="/generate" onClick={() => setMenuOpen(false)}>Generate Trip</Link>
-              ) : (
-                <SignInButton>
+              <SignedOut>
+                <SignInButton mode="modal">
                   <button onClick={() => setMenuOpen(false)}>Login</button>
                 </SignInButton>
-              )}
+              </SignedOut>
+
+              <SignedIn>
+                <div className="px-2 py-1">
+                  <UserButton afterSignOutUrl="/" />
+                </div>
+              </SignedIn>
 
               {navConfig.map(({ label, to, isLive }) => (
                 <Link key={label} to={to} onClick={() => setMenuOpen(false)} className="flex items-center">
