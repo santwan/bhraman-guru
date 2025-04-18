@@ -3,13 +3,17 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import Input from '../../components/Input.jsx';
 import { SelectBudgetOptions, SelectTravelList } from '../../constants/option.jsx';
 import { toast } from 'sonner';
-import { generateTravelPlan } from '../../services/AIModel.jsx'; // Adjust path accordingly
+import { generateTravelPlan } from '../../services/AIModel.jsx';
+import { useUser, SignInButton, useSignIn } from "@clerk/clerk-react";
 
 function CreateTrip() {
     const [place, setPlace] = useState();
     const [formData, setFormData] = useState({});
     const [loading, setLoading] = useState(false);
-    const [tripPlan, setTripPlan] = useState(null); // store response
+    const [tripPlan, setTripPlan] = useState(null);
+
+    const { isSignedIn } = useUser(); // check if user is signed in
+    const signIn = SignInButton().props.onClick; // get popup trigger
 
     const handleInputChange = (name, value) => {
         if (name === 'noOfDays' && value > 15) {
@@ -27,34 +31,40 @@ function CreateTrip() {
     }, [formData]);
 
     const onGenerateTrip = async () => {
+        if (!isSignedIn) {
+            toast("Please sign in to continue");
+            signIn(); // open sign-in popup
+            return;
+        }
+
         if (!formData?.noOfDays || !formData?.location || !formData?.budget || !formData?.traveler) {
-          toast("Please Fill all the details");
-          return;
+            toast("Please Fill all the details");
+            return;
         }
-      
+
         if (formData.noOfDays > 15) {
-          toast("Enter Travel Days less than 15");
-          return;
+            toast("Enter Travel Days less than 15");
+            return;
         }
-      
+
         try {
-          setLoading(true);
-          const location = formData.location?.label || formData.location; // use .label if coming from GooglePlacesAutocomplete
-          const plan = await generateTravelPlan({
-            location,
-            noOfDays: formData.noOfDays,
-            traveler: formData.traveler,
-            budget: formData.budget,
-          });
-      
-          console.log("Generated Trip Plan:", plan);
-          //setTripPlan(JSON.parse(plan)); // store parsed response
-          toast("Trip plan generated!");
+            setLoading(true);
+            const location = formData.location?.label || formData.location;
+            const plan = await generateTravelPlan({
+                location,
+                noOfDays: formData.noOfDays,
+                traveler: formData.traveler,
+                budget: formData.budget,
+            });
+
+            console.log("Generated Trip Plan:", plan);
+            // setTripPlan(JSON.parse(plan));
+            toast("Trip plan generated!");
         } catch (err) {
-          console.error(err);
-          toast("Something went wrong while generating the trip.");
+            console.error(err);
+            toast("Something went wrong while generating the trip.");
         } finally {
-          setLoading(false);
+            setLoading(false);
         }
     };
 
