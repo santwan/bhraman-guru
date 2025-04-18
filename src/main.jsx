@@ -7,6 +7,7 @@ import Layout from './components/global/Layout.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Toaster } from "@/components/ui/sonner.jsx"
 import { ClerkProvider } from '@clerk/clerk-react'
+import MyTrips from './pages/my-trips/MyTrips.jsx'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
