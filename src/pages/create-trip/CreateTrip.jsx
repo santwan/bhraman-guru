@@ -5,6 +5,7 @@ import { SelectBudgetOptions, SelectTravelList } from '../../constants/option.js
 import { toast } from 'sonner';
 import { generateTravelPlan } from '../../services/AIModel.jsx';
 import { useUser, SignInButton } from "@clerk/clerk-react";
+import { saveTripToFireStore } from '../../services/firestore.js';
 
 function CreateTrip() {
   const [place, setPlace] = useState();
@@ -12,7 +13,7 @@ function CreateTrip() {
   const [loading, setLoading] = useState(false);
   const [tripPlan, setTripPlan] = useState(null);
 
-  const { isSignedIn } = useUser();
+  const { isSignedIn, user } = useUser();
   const signInRef = useRef(); // ✅ Ref to trigger sign in
 
   const handleInputChange = (name, value) => {
@@ -29,6 +30,14 @@ function CreateTrip() {
   useEffect(() => {
     console.log(formData);
   }, [formData]);
+
+  // Only For Testing Purpose
+//   useEffect(() => {
+//     if (isSignedIn && user) {
+//       console.log("Logged in as:", user.id, user.emailAddresses[0]?.emailAddress);
+//     }
+//   }, [isSignedIn]);
+  
 
   const onGenerateTrip = async () => {
     if (!isSignedIn) {
@@ -57,7 +66,19 @@ function CreateTrip() {
         budget: formData.budget,
       });
 
-      console.log("Generated Trip Plan:", plan);
+
+      await saveTripToFireStore({
+        userId: user.id,
+        input: {
+            location,
+            noOfDays: formData.noOfDays,
+            traveler: formData.traveler,
+            budget: formData.budget,
+        },
+        plan,
+      })
+
+    //   console.log("Generated Trip Plan:", plan);
       toast("Trip plan generated!");
     } catch (err) {
       console.error(err);
