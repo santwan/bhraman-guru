@@ -1,5 +1,13 @@
 import { db } from "../firebase/firebaseConfig.js";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { 
+    collection,
+    addDoc, 
+    serverTimestamp, 
+    query,
+    getDocs,
+    where,
+
+} from "firebase/firestore";
 
 
 export const saveTripToFireStore = async ({userId, input, plan}) => {
@@ -14,6 +22,25 @@ export const saveTripToFireStore = async ({userId, input, plan}) => {
         return docRef.id
     } catch ( error ){
         console.error("Error saving trip:", error)
+        throw error
+    }
+}
+
+
+export const getTripsByUserId = async (userId) => {
+    try{
+        const q = query(collection(db, "trips"), where("userId", "==", userId))
+        const querySnapshot = await getDocs(q)
+
+        const trips = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data()
+        }))
+
+        return trips
+
+    } catch(error){
+        console.log("Error while fetching trips:", error)
         throw error
     }
 }
