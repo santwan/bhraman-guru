@@ -6,13 +6,13 @@ import { UserButton, SignedIn, SignedOut, SignInButton } from "@clerk/clerk-reac
 import ThemeToggle from "./ThemeToggle.jsx";
 import { useNavigate } from "react-router-dom";
 
-const CustomUserNaviagte = () => {
-  const navigate = useNavigate()
-}
+  
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navigate = useNavigate()
 
   const navConfig = [
     { label: "Plan Trip", to: "/create-trip", isLive: false },
