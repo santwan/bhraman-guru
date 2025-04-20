@@ -1,12 +1,56 @@
-# React + Vite
+# 🌍 BhramanGuru - Your AI Travel Planner ✈️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**BhramanGuru** is a full-stack AI-powered travel itinerary generator that uses **Google Gemini Pro**, **Google Places API**, and **Firebase**. It provides personalized, location-based travel plans including hotels, places to visit, and maps — all curated through AI.
 
-Currently, two official plugins are available:
+🚀 Hosted On:
+- 🔗 [Frontend (Vercel)](https://your-vercel-link.vercel.app)
+- 🔗 [Backend (Railway)](https://your-backend-url.up.railway.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📸 Demo Preview
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+![Demo Screenshot](https://your-demo-link-here.com)
+
+---
+
+## 🚀 Features
+
+### ✨ AI-Powered Itinerary
+- Smart trip plans powered by Google Gemini Pro.
+- Returns structured JSON with hotels, daily itinerary, maps, and more.
+
+### 🏨 Real Hotels & Places
+- Hotels and itinerary locations pulled using **Google Places API**.
+- Image fetching via backend proxy to avoid CORS.
+
+### 🔐 Auth & User Dashboard
+- Modern authentication with **Clerk**.
+- Authenticated users can:
+  - Generate trips
+  - View **Trip History**
+  - See saved trip details
+
+### ☁️ Firebase Firestore
+- User-specific storage of trip data with timestamps.
+- Trip details are tied to `userId`.
+
+### 🌗 Theme Support
+- Dark mode / light mode toggle.
+- Fully responsive Tailwind UI with Framer Motion.
+
+---
+
+## ⚙️ Tech Stack
+
+| Frontend         | Backend          | APIs Used                      | Hosting              |
+|------------------|------------------|--------------------------------|-----------------------|
+| React + Vite     | Node.js + Express| Google Gemini Pro              | Vercel (Frontend)     |
+| Tailwind CSS     | CORS-secured API | Google Places & Maps API       | Railway (Backend)     |
+| Clerk Auth       | Axios + dotenv   | Firebase Firestore + Clerk SDK | Firebase (Firestore)  |
+
+---
+
+## 📂 Folder Structure
+
+BHRAMAN-GURU/ ├── backend/ # Express.js backend server │ ├── index.js # Main API entry point │ ├── .env # Environment variables (GEMINI, GOOGLE keys, etc.) │ ├── package.json # Backend dependencies │ └── node_modules/ │ ├── frontend/ # React frontend built with Vite │ ├── public/ # Static assets │ ├── src/ # All frontend logic (components, pages, services) │ ├── .env # Vite environment vars (frontend) │ ├── index.html │ ├── vite.config.js # Vite + Tailwind setup │ ├── vercel.json # Rewrites config for routing │ └── package.json # Frontend dependencies │ ├── .gitignore ├── LICENSE ├── README.md
