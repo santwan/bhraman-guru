@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <div className="bg-white  text-[#3a2601] py-20 px-6 text-center space-y-10">
+    <div className="bg-white dark:bg-[#0d0d0d] text-[#3a2601] dark:text-white py-20 px-6 text-center space-y-10 transition-colors duration-300">
       
       {/* Big Slogan Header */}
       <motion.h1
@@ -16,10 +16,10 @@ const HeroSection = () => {
         className="text-4xl sm:text-5xl md:text-5xl font-bold tracking-tight"
       >
         <div className="md:px-25 leading-snug">
-            <p>
-                <span className="text-decoration: underline">BhramanGuru </span>: Your Expert AI Travel Planner
-                <br /> <span className="">and Journey Curator</span>
-            </p>
+          <p>
+            <span className="underline">BhramanGuru</span>: Your Expert AI Travel Planner
+            <br /> <span>and Journey Curator</span>
+          </p>
         </div>
       </motion.h1>
 
@@ -28,7 +28,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
-        className="max-w-2xl mx-auto text-lg sm:text-xl  text-[#3a2601]/85"
+        className="max-w-2xl mx-auto text-lg sm:text-xl text-[#3a2601]/85 dark:text-white/80"
       >
         Stop searching, start experiencing. Unlock smart, personalized itineraries and discover secret local spots for truly unforgettable and hassle-free adventures.
       </motion.p>
@@ -42,10 +42,13 @@ const HeroSection = () => {
       >
         <Link
           to={"/create-trip"}
-          className="gap-1 inline-flex items-center px-12 py-4 text-lg font-bold rounded-xl bg-[#F9C74F] text-[#1A4D8F] hover:bg-[#F6A6A1] hover:text-black active:scale-110 shadow-lg transition-all duration-900"
+          className="gap-1 inline-flex items-center px-12 py-4 text-lg font-bold rounded-xl 
+          bg-[#F9C74F] text-[#1A4D8F] hover:bg-[#F6A6A1] hover:text-black 
+          dark:bg-[#4BA3B4] dark:text-white dark:hover:bg-[#F9C74F] dark:hover:text-black 
+          active:scale-110 shadow-lg transition-all duration-300"
         >
           Plan Trip
-          <Compass className="" />
+          <Compass />
         </Link>
       </motion.div>
 
