@@ -18,7 +18,7 @@ app.use(cors({
 // 2) Rate limiting
 app.use(rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100,
+  max: 500,
   message: { error: "Too many requests, please try again later." }
 }));
 
@@ -196,7 +196,10 @@ app.post("/api/generate-trip", async (req, res) => {
   }
 });
 
-
+// Health check route
+app.get("/", (req, res) => {
+  res.send("BhramanGuru Backend is running 🚀");
+});
 
 // Start the server
 app.listen(PORT, () => {

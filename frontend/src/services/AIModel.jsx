@@ -1,3 +1,5 @@
+import React from "react";
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export async function generateTravelPlan(input) {
@@ -11,5 +13,6 @@ export async function generateTravelPlan(input) {
 
   if (!res.ok) throw new Error(data?.error || res.statusText);
 
-  return data.plan; // ✅ make sure backend returns { plan: ... }
+  return data; // ⬅️ Now correct because backend returns full plan object
 }
+
