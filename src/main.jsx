@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Toaster } from "@/components/ui/sonner.jsx"
 import { ClerkProvider } from '@clerk/clerk-react'
 import MyTrips from './pages/my-trips/MyTrips.jsx'
+import TripHistory from './pages/my-trips/trip-history/TripHistory.jsx'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '/my-trips',
         element: <MyTrips />
+      },
+      {
+        path: '/trip-history',
+        element: <TripHistory/>
       }
     ]
   }
