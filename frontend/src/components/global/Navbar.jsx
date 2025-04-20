@@ -90,10 +90,14 @@ const Navbar = () => {
             <SignedIn>
               <UserButton afterSignOutUrl="/">
                 <UserButton.MenuItems>
-                  <UserButton.Link
+                  <UserButton.Action
                     label="Trip History"
-                    labelIcon={<svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5a2 2 0 0 0-2 2v14a2..."/></svg>}
-                    href="/trip-history"
+                    onClick={() => navigate("/trip-history")}
+                    labelIcon={
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 3H5a2 2 0 0 0-2 2v14a2..." />
+                      </svg>
+                    }
                   />
                   <UserButton.Action label="manageAccount" />
                   <UserButton.Action label="signOut" />
