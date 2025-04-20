@@ -51,6 +51,34 @@
 
 ---
 
-## 📂 Folder Structure
 
-BHRAMAN-GURU/ ├── backend/ # Express.js backend server │ ├── index.js # Main API entry point │ ├── .env # Environment variables (GEMINI, GOOGLE keys, etc.) │ ├── package.json # Backend dependencies │ └── node_modules/ │ ├── frontend/ # React frontend built with Vite │ ├── public/ # Static assets │ ├── src/ # All frontend logic (components, pages, services) │ ├── .env # Vite environment vars (frontend) │ ├── index.html │ ├── vite.config.js # Vite + Tailwind setup │ ├── vercel.json # Rewrites config for routing │ └── package.json # Frontend dependencies │ ├── .gitignore ├── LICENSE ├── README.md
+## 📁 Project Folder Structure
+
+```bash
+BHRAMAN-GURU/
+├── backend/                     # Express.js backend (Node.js)
+│   ├── node_modules/           # Backend dependencies
+│   ├── .env                    # Backend environment variables (API keys etc.)
+│   ├── index.js                # Main backend server file
+│   ├── package-lock.json
+│   └── package.json            # Backend dependencies manifest
+│
+├── frontend/                   # Frontend (React + Vite)
+│   ├── node_modules/           # Frontend dependencies
+│   ├── public/                 # Static public files
+│   ├── src/                    # Source code (components, pages, services)
+│   ├── .env                    # Frontend environment variables
+│   ├── eslint.config.js        # Linting configuration
+│   ├── index.html              # Root HTML file
+│   ├── jsconfig.json           # Path resolution settings for VSCode
+│   ├── package-lock.json
+│   ├── package.json            # Frontend dependencies manifest
+│   ├── vercel.json             # Rewrites/routing config for Vercel
+│   └── vite.config.js          # Vite + Tailwind config
+│
+├── .gitattributes              # Git LFS / linguist hints
+├── .gitignore                  # Files ignored by Git
+├── components.json             # (Optional) Component metadata or config
+├── LICENSE                     # Project license
+├── package-lock.json           # Global lock file if using root install
+└── README.md                   # Project documentation
