@@ -7,17 +7,17 @@ import { generateTravelPlan } from '../../services/AIModel.jsx';
 import { useUser, SignInButton } from "@clerk/clerk-react";
 import { saveTripToFireStore } from '../../services/firestore.js';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion'; // ✅ Import
 
 function CreateTrip() {
   const [place, setPlace] = useState();
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [tripPlan, setTripPlan] = useState(null);
-  
 
   const navigate = useNavigate()
   const { isSignedIn, user } = useUser();
-  const signInRef = useRef(); // ✅ Ref to trigger sign in
+  const signInRef = useRef();
 
   const handleInputChange = (name, value) => {
     if (name === 'noOfDays' && value > 15) {
@@ -34,18 +34,10 @@ function CreateTrip() {
     console.log(formData);
   }, [formData]);
 
-  // Only For Testing Purpose
-//   useEffect(() => {
-//     if (isSignedIn && user) {
-//       console.log("Logged in as:", user.id, user.emailAddresses[0]?.emailAddress);
-//     }
-//   }, [isSignedIn]);
-  
-
   const onGenerateTrip = async () => {
     if (!isSignedIn) {
       toast("Please sign in to continue");
-      signInRef.current.click(); // ✅ Trigger Clerk sign-in modal
+      signInRef.current.click();
       return;
     }
 
@@ -69,8 +61,7 @@ function CreateTrip() {
         budget: formData.budget,
       });
 
-      
-      await saveTripToFireStore({
+      const tripId = await saveTripToFireStore({
         userId: user.id,
         input: {
             location,
@@ -81,11 +72,10 @@ function CreateTrip() {
         plan,
       })
 
-    //   console.log("Generated Trip Plan:", plan);
       toast("Trip plan generated!");
 
       setTimeout(() => {
-        navigate("/my-trips")
+        navigate(`/my-trips?tripId=${tripId}`)
       }, 1500)
     } catch (err) {
       console.error(err);
@@ -96,15 +86,19 @@ function CreateTrip() {
   };
 
   return (
-    <div className='sm:px-10 md:px-32 lg:px-56 xl:px-60 px-5 pt-25 mt-10'>
+    <motion.div
+      className='sm:px-10 md:px-32 lg:px-56 xl:px-60 px-5 pt-25 mt-10'
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
       <h2 className='text-3xl font-sans font-bold mb-3'>Tell us your Travel preferences</h2>
       <p className='max-w-fit'>
         Just provide some basic information, and our trip planner will generate a customized itinerary based on your preferences.
       </p>
 
-      <div className='mt-10'>
-        {/* Location */}
-        <div>
+      <div className='mt-10 space-y-10'>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
           <h2 className='font-semibold mb-2'>What is Destination of choice?</h2>
           <GooglePlacesAutocomplete
             apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
@@ -115,67 +109,103 @@ function CreateTrip() {
                 handleInputChange("location", v);
               },
               placeholder: "Search your destination...",
-              isClearable: true
+              isClearable: true,
+              styles: {
+                control: (base, state) => ({
+                  ...base,
+                  backgroundColor: document.documentElement.classList.contains("dark") ? "#1a1a1a" : "white",
+                  color: document.documentElement.classList.contains("dark") ? "white" : "black",
+                  borderColor: state.isFocused ? "#F9C74F" : "#ccc",
+                  boxShadow: state.isFocused ? "0 0 0 1px #F9C74F" : "none",
+                  "&:hover": {
+                    borderColor: "#F9C74F"
+                  }
+                }),
+                singleValue: (base) => ({
+                  ...base,
+                  color: document.documentElement.classList.contains("dark") ? "white" : "black"
+                }),
+                menu: (base) => ({
+                  ...base,
+                  backgroundColor: document.documentElement.classList.contains("dark") ? "#1a1a1a" : "white",
+                  color: document.documentElement.classList.contains("dark") ? "white" : "black"
+                }),
+                option: (base, { isFocused }) => ({
+                  ...base,
+                  backgroundColor: isFocused
+                    ? (document.documentElement.classList.contains("dark") ? "#333" : "#eee")
+                    : "transparent",
+                  color: document.documentElement.classList.contains("dark") ? "white" : "black"
+                }),
+                input: (base) => ({
+                  ...base,
+                  color: document.documentElement.classList.contains("dark") ? "white" : "black"
+                }),
+              }
+              
             }}
           />
-        </div>
 
-        {/* Days */}
-        <div className="mt-10">
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
           <h2 className='font-semibold mb-2'>How many days are you planning for?</h2>
           <Input
             placeholder="Ex. 3"
             type="number"
             onChange={(e) => handleInputChange('noOfDays', e.target.value)}
           />
-        </div>
+        </motion.div>
 
-        {/* Budget */}
-        <div className='mt-10'>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
           <h2 className='font-semibold mb-0'>What is Your Budget?</h2>
           <h3 className='font-normal mb-2'>The Budget is exclusively allocated for activities and dining purpose</h3>
-          <div className='grid grid-cols-3 gap-3'>
+          <div className='grid grid-cols-2 md:grid-cols-3 gap-3'>
             {SelectBudgetOptions.map((item, index) => {
               const Icon = item.icon;
               return (
-                <div
+                <motion.div
                   key={index}
+                  whileHover={{ scale: 1.05 }}
+                  className={`p-3 border cursor-pointer rounded-lg ${formData?.budget === item.title && ' shadow-[0_0_20px_rgba(249,199,79,1)] border-red-600 scale-95 '}`}
                   onClick={() => handleInputChange('budget', item.title)}
-                  className={`p-2 border cursor-pointer rounded-lg hover:shadow-lg ${formData?.budget === item.title && 'shadow-lg border-black'}`}
                 >
                   <Icon className="w-8 h-8 text-red-600" />
                   <h2 className="font-medium">{item.title}</h2>
                   <h2 className="text-xs text-gray-500">{item.desc}</h2>
-                </div>
+                </motion.div>
               );
             })}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Traveler Type */}
-        <div className='mt-10'>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
           <h2 className='font-semibold mb-2'>Who do you plan on traveling with on your next adventure?</h2>
-          <div className='grid grid-cols-3 gap-2'>
+          <div className='grid grid-cols-2 md:grid-cols-3 gap-2'>
             {SelectTravelList.map((item, index) => {
               const Icon = item.icon;
               return (
-                <div
+                <motion.div
                   key={index}
+                  whileHover={{ scale: 1.05 }}
+                  className={`py-2 px-3 border cursor-pointer rounded-lg ${formData?.traveler === item.people && 'shadow-[0_0_20px_rgba(139,92,246,1)] border-indigo-600 scale-90'}`}
                   onClick={() => handleInputChange('traveler', item.people)}
-                  className={`p-2 border cursor-pointer rounded-lg hover:shadow-lg ${formData?.traveler === item.people && 'shadow-lg border-black'}`}
                 >
                   <Icon className='w-8 h-8 text-indigo-600 mb-1' />
                   <h2 className='font-medium'>{item.title}</h2>
                   <h2 className='text-xs text-gray-500'>{item.desc}</h2>
                   <h2 className='text-gray-900'>{item.people}</h2>
-                </div>
+                </motion.div>
               );
             })}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Generate Trip Button */}
-        <div className='mt-10 text-right'>
+        <motion.div
+          className='text-right'
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
           <button
             onClick={onGenerateTrip}
             disabled={loading}
@@ -183,14 +213,13 @@ function CreateTrip() {
           >
             {loading ? 'Generating...' : 'Generate Trip'}
           </button>
-        </div>
+        </motion.div>
       </div>
 
-      {/* 🔒 Hidden SignIn trigger */}
       <SignInButton mode="modal">
         <button ref={signInRef} style={{ display: "none" }} />
       </SignInButton>
-    </div>
+    </motion.div>
   );
 }
 
