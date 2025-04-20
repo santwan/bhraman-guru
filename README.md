@@ -3,7 +3,7 @@
 **BhramanGuru** is a full-stack AI-powered travel itinerary generator that uses **Google Gemini Pro**, **Google Places API**, and **Firebase**. It provides personalized, location-based travel plans including hotels, places to visit, and maps — all curated through AI.
 
 🚀 Hosted On:
-- 🔗 [Frontend (Vercel)](https://your-vercel-link.vercel.app)
+- 🔗 [Frontend (Vercel)](https://bhraman-guru.vercel.app/)
 - 🔗 [Backend (Railway)](https://your-backend-url.up.railway.app)
 
 ---
