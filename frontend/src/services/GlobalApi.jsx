@@ -3,7 +3,7 @@ export const getPlaceImage = async (placeName) => {
   try {
     const encodedPlace = encodeURIComponent(placeName);
     // ← use a relative path here…
-    const res = await fetch(`/api/place-details?placeName=${encodedPlace}`);
+    const res = await fetch(`https://bhraman-guru-production.up.railway.app/api/place-details?placeName=${encodedPlace}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     return data.imageUrl || null;
