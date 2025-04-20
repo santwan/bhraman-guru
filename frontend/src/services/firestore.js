@@ -10,25 +10,21 @@ import {
 } from "firebase/firestore";
 
 
-export const saveTripToFireStore = async ({ userId, input, plan }) => {
+export const saveTripToFireStore = async ({userId, input, plan}) => {
     try {
-      // If plan came in as a JSON string, parse it; otherwise assume it's already an object
-      const parsedPlan = typeof plan === "string" ? JSON.parse(plan) : plan;
-  
-      const docRef = await addDoc(collection(db, "trips"), {
-        userId,
-        input,
-        plan: parsedPlan,
-        createdAt: serverTimestamp()
-      });
-  
-      console.log("Trip saved with ID:", docRef.id);
-      return docRef.id;
-    } catch (error) {
-      console.error("Error saving trip:", error);
-      throw error;
+        const docRef = await addDoc(collection(db, "trips"), {
+            userId,
+            input,
+            plan,
+            createdAt: serverTimestamp()
+        })
+        console.log("Trip saved with ID:", docRef.id)
+        return docRef.id
+    } catch ( error ){
+        console.error("Error saving trip:", error)
+        throw error
     }
-  };
+}
 
 
 export const getTripsByUserId = async (userId) => {
