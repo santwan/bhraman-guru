@@ -1,6 +1,5 @@
-// src/services/AIModel.jsx
 export async function generateTravelPlan(input) {
-  const res = await fetch("/api/generate-trip", {
+  const res = await fetch("https://bhraman-guru-production.up.railway.app/api/generate-trip", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(input),
