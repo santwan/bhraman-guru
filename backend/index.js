@@ -92,6 +92,7 @@ app.post("/api/generate-trip", async (req, res) => {
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
     const config = {
       responseMimeType: "application/json",
+      temperature: 0.8,
       systemInstruction: [{
         text: `Generate a detailed Travel Plan for:
       
