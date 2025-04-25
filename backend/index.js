@@ -161,7 +161,7 @@ app.post("/api/generate-trip", async (req, res) => {
                 Respond only with JSON — no explanations or text before/after.`,
       }],
     };
-    const model =  "gemini-1.5-pro-latest";
+    const model =  "gemini-pro";
     const contents = [{
       role: "user",
       parts: [{ text: `Plan my trip to ${location}.` }]
