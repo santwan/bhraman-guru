@@ -37,7 +37,7 @@
 
 ### 🌗 Theme Support
 - Dark mode / light mode toggle.
-- Fully responsive Tailwind UI with Framer Motion.
+- Fully responsive Tailwind CSS with Framer Motion.
 
 ---
 
