@@ -6,14 +6,13 @@ import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle.jsx";
 import { useAuth } from "../../context/AuthContext.jsx";
 import UserDropdown from "./UserDropdown.jsx";
-import AuthModal from "../AuthModal.jsx";
+import LoginButton from "./LoginButton.jsx";
+import SignupButton from "./SignupButton.jsx";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { currentUser } = useAuth();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
 
   const navConfig = [
     { label: "Plan Trip", to: "/create-trip", isLive: false },
@@ -29,14 +28,9 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const openModal = (login) => {
-    setIsLogin(login);
-    setModalOpen(true);
-  };
-
   return (
     <>
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 
+      <nav className={`fixed top-0 w-full z-40 transition-all duration-500 
         ${scrolled ? "h-0 bg-transparent" : "h-auto bg-white dark:bg-[#0d0d0d] border-b border-gray-200 dark:border-gray-800"}`}>
         
         <div className="max-w-[1500px] mx-auto px-4 p-10 md:py-8 flex justify-between items-center">
@@ -89,12 +83,8 @@ const Navbar = () => {
               <UserDropdown />
             ) : (
               <>
-                <button onClick={() => openModal(true)} className="text-lg px-8 py-2 rounded-xl font-bold text-black dark:text-white shadow-md hover:shadow-xl ring-1 ring-[#F9C74F]/50 hover:scale-110 transition-all duration-300 ease-in-out">
-                  Login
-                </button>
-                <button onClick={() => openModal(false)} className="text-lg px-8 py-2 rounded-xl font-bold text-white bg-[#1A4D8F] dark:bg-[#F9C74F] shadow-md hover:shadow-xl ring-1 ring-black/10 hover:scale-110 transition-all duration-300 ease-in-out">
-                  Sign Up
-                </button>
+                <LoginButton />
+                <SignupButton />
               </>
             )}
           </div>
@@ -125,8 +115,8 @@ const Navbar = () => {
                 </div>
               ) : (
                 <>
-                  <button onClick={() => {openModal(true); setMenuOpen(false);}}>Login</button>
-                  <button onClick={() => {openModal(false); setMenuOpen(false);}}>Sign Up</button>
+                  <LoginButton />
+                  <SignupButton />
                 </>
               )}
 
@@ -163,7 +153,6 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <AuthModal isOpen={modalOpen} setIsOpen={setModalOpen} isLogin={isLogin} />
     </>
   );
 };

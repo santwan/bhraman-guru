@@ -1,40 +1,30 @@
-
-import { createContext, useContext, useEffect, useState } from 'react';
-import { auth } from '../firebase/firebaseConfig'; // Make sure this path is correct
-import { 
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut 
-} from 'firebase/auth';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import { auth } from '../firebase/firebaseConfig'; // Adjust this path to your Firebase config
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 
 const AuthContext = createContext();
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
+export const useAuth = () => useContext(AuthContext);
 
-export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  function signup(email, password) {
-    // This communicates with Firebase on the client side
+  const signup = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
-  }
+  };
 
-  function login(email, password) {
-    // This also communicates with Firebase on the client side
+  const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
-  }
+  };
 
-  function logout() {
+  const logout = () => {
     return signOut(auth);
-  }
+  };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
-      setCurrentUser(user);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
       setLoading(false);
     });
 
@@ -42,10 +32,11 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = {
-    currentUser,
+    user,
     signup,
     login,
-    logout
+    logout,
+    loading
   };
 
   return (
@@ -53,4 +44,4 @@ export function AuthProvider({ children }) {
       {!loading && children}
     </AuthContext.Provider>
   );
-}
+};

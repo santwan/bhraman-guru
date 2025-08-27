@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
-import { useUser } from "@clerk/clerk-react";
+import { useAuth } from "../../context/AuthContext";
 
 // Component imports
 import TripOverview from "../../components/my-trips/TripOverview.jsx";
@@ -12,7 +12,7 @@ import { getPlaceImage } from "../../services/GlobalApi.jsx"; // ✅ Backend pro
 
 export default function MyTrips() {
   const [searchParams] = useSearchParams();
-  const { user } = useUser();
+  const { user } = useAuth();
   const [tripData, setTripData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -20,13 +20,13 @@ export default function MyTrips() {
 
   useEffect(() => {
     const fetchTrip = async () => {
-      if (!tripId || !user?.id) return;
+      if (!tripId || !user?.uid) return;
 
       try {
         const tripRef = doc(db, "trips", tripId);
         const tripSnap = await getDoc(tripRef);
 
-        if (tripSnap.exists() && tripSnap.data().userId === user.id) {
+        if (tripSnap.exists() && tripSnap.data().userId === user.uid) {
           const data = tripSnap.data();
 
           // ✅ Enhance hotel images only
@@ -53,7 +53,9 @@ export default function MyTrips() {
       }
     };
 
-    fetchTrip();
+    if (user) {
+        fetchTrip();
+    }
   }, [tripId, user]);
 
   if (loading) return <p className="p-4">Loading trip...</p>;

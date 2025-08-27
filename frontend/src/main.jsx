@@ -6,11 +6,9 @@ import App from './App.jsx'
 import CreateTrip from './pages/create-trip/CreateTrip.jsx'
 import Layout from './components/global/Layout.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Toaster } from "@/components/ui/sonner.jsx"
 import { AuthProvider } from './context/AuthContext.jsx' // Import the new AuthProvider
 import MyTrips from './pages/my-trips/MyTrips.jsx'
 import TripHistory from './pages/my-trips/trip-history/TripHistory.jsx'
-import BlogPage from './pages/blog/BlogPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -33,10 +31,7 @@ const router = createBrowserRouter([
         path: '/trip-history',
         element: <TripHistory/>
       },
-      {
-        path: '/blog',
-        element: <BlogPage/>
-      }
+      
     ]
   }
 ])
@@ -44,7 +39,7 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>  {/* Replace ClerkProvider with AuthProvider */}
-      <Toaster />
+      
       <RouterProvider router={router} />
     </AuthProvider>
   </StrictMode>

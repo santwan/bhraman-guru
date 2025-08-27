@@ -2,21 +2,21 @@ import React, { useState, useEffect, useRef } from 'react';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import Input from '../../components/Input.jsx';
 import { SelectBudgetOptions, SelectTravelList } from '../../constants/option.jsx';
-import { toast } from 'sonner';
 import { generateTravelPlan } from '../../services/AIModel.jsx';
-import { useUser, SignInButton } from "@clerk/clerk-react";
+import { useAuth } from '../../context/AuthContext.jsx';
 import { saveTripToFireStore } from '../../services/firestore.js';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import AuthModal from '../../components/global/AuthModal.jsx';
 
 function CreateTrip() {
   const [place, setPlace] = useState();
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const navigate = useNavigate();
-  const { isSignedIn, user } = useUser();
-  const signInRef = useRef();
+  const { user } = useAuth();
 
   const handleInputChange = (name, value) => {
     if (name === 'noOfDays' && value > 15) {
@@ -30,9 +30,8 @@ function CreateTrip() {
   }, [formData]);
 
   const onGenerateTrip = async () => {
-    if (!isSignedIn) {
-      toast("Please sign in to continue");
-      signInRef.current.click();
+    if (!user) {
+        setShowAuthModal(true);
       return;
     }
     const { noOfDays, location, budget, traveler } = formData;
@@ -58,7 +57,7 @@ function CreateTrip() {
   
       // save the object directly
       const tripId = await saveTripToFireStore({
-        userId: user.id,
+        userId: user.uid,
         input: { location: locLabel, noOfDays, traveler, budget },
         plan,                  // no JSON.stringify
       });
@@ -72,8 +71,7 @@ function CreateTrip() {
     } finally {
       setLoading(false);
     }
-  };
-  
+  };  
 
   return (
     <motion.div
@@ -222,25 +220,9 @@ function CreateTrip() {
         </motion.div>
       </div>
 
-      {/* Hidden sign-in trigger */}
-      <SignInButton mode="modal">
-        <button ref={signInRef} style={{ display: 'none' }} />
-      </SignInButton>
+      {showAuthModal && <AuthModal isLogin={true} onClose={() => setShowAuthModal(false)} />}
     </motion.div>
   );
 }
 
 export default CreateTrip;
-
-
-
-
-
-
-
-
-
-
-
-
-

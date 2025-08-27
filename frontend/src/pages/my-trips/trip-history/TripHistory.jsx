@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { collection, query, where, getDocs, orderBy, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
-import { useUser } from "@clerk/clerk-react";
+import { useAuth } from "../../../context/AuthContext";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Trash2 } from "lucide-react";
 
 export default function TripHistory() {
-  const { user } = useUser();
+  const { user } = useAuth();
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTrips = async () => {
-      if (!user?.id) return;
+      if (!user?.uid) {
+        setLoading(false);
+        return;
+      }
 
       try {
         const tripsRef = collection(db, "trips");
-        const q = query(tripsRef, where("userId", "==", user.id), orderBy("createdAt", "desc"));
+        const q = query(tripsRef, where("userId", "==", user.uid), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
 
         const allTrips = querySnapshot.docs.map(doc => ({
@@ -53,9 +56,9 @@ export default function TripHistory() {
   return (
     <div className="max-w-5xl mx-auto p-10 pt-55  md:p-10 lg:p-3 md:pt-35 lg:pt-38 ">
       <h1 className="text-3xl font-bold mb-6">My Trip History</h1>
-      {trips.length === 0 ? (
-        <p className="text-gray-600">No trips found.</p>
-      ) : (
+      {!user && <p className="text-gray-600">Please log in to view your trip history.</p>}
+      {user && trips.length === 0 && <p className="text-gray-600">No trips found.</p>}
+      {user && trips.length > 0 && (
         <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-6">
           {trips.map((trip, i) => (
             <motion.div
