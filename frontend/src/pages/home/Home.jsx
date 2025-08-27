@@ -1,4 +1,3 @@
-import { div } from "framer-motion/client";
 import React from "react";
 import HeroSection from "../../components/HeroSection.jsx";
 import TestimonialSection from "../../components/TestimonialSection.jsx";

@@ -7,7 +7,6 @@ import {
   signInWithEmailAndPassword,
   signOut 
 } from 'firebase/auth';
-import { ApiError } from '../../backend/src/utils/ApiError';
 
 const AuthContext = createContext();
 

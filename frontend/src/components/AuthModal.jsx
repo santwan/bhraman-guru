@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 import { X } from 'lucide-react';
 
 const AuthModal = ({ isOpen, setIsOpen, isLogin }) => {
