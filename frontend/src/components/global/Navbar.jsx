@@ -1,18 +1,19 @@
+
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import { UserButton, SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 import ThemeToggle from "./ThemeToggle.jsx";
-import { useNavigate } from "react-router-dom";
-
-  
+import { useAuth } from "../../context/AuthContext.jsx";
+import UserDropdown from "./UserDropdown.jsx";
+import AuthModal from "../AuthModal.jsx";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const navigate = useNavigate()
+  const { currentUser } = useAuth();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   const navConfig = [
     { label: "Plan Trip", to: "/create-trip", isLive: false },
@@ -27,6 +28,11 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const openModal = (login) => {
+    setIsLogin(login);
+    setModalOpen(true);
+  };
 
   return (
     <>
@@ -79,31 +85,18 @@ const Navbar = () => {
           {/* Right Section */}
           <div className={`hidden sm:flex items-center space-x-3 transition-opacity duration-500 ${scrolled ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
             <ThemeToggle />
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="text-lg px-8 py-2 rounded-xl font-bold text-black dark:text-white shadow-md hover:shadow-xl ring-1 ring-[#F9C74F]/50 hover:scale-110 transition-all duration-300 ease-in-out">
+            {currentUser ? (
+              <UserDropdown />
+            ) : (
+              <>
+                <button onClick={() => openModal(true)} className="text-lg px-8 py-2 rounded-xl font-bold text-black dark:text-white shadow-md hover:shadow-xl ring-1 ring-[#F9C74F]/50 hover:scale-110 transition-all duration-300 ease-in-out">
                   Login
                 </button>
-              </SignInButton>
-            </SignedOut>
-
-            <SignedIn>
-              <UserButton afterSignOutUrl="/">
-                <UserButton.MenuItems>
-                  <UserButton.Action
-                    label="Trip History"
-                    onClick={() => navigate("/trip-history")}
-                    labelIcon={
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19 3H5a2 2 0 0 0-2 2v14a2..." />
-                      </svg>
-                    }
-                  />
-                  <UserButton.Action label="manageAccount" />
-                  <UserButton.Action label="signOut" />
-                </UserButton.MenuItems>
-              </UserButton>
-            </SignedIn>
+                <button onClick={() => openModal(false)} className="text-lg px-8 py-2 rounded-xl font-bold text-white bg-[#1A4D8F] dark:bg-[#F9C74F] shadow-md hover:shadow-xl ring-1 ring-black/10 hover:scale-110 transition-all duration-300 ease-in-out">
+                  Sign Up
+                </button>
+              </>
+            )}
           </div>
 
           {/* Mobile Hamburger */}
@@ -126,17 +119,16 @@ const Navbar = () => {
               <div className="pt-10">
               <ThemeToggle />
               </div>
-              <SignedOut>
-                <SignInButton mode="modal">
-                  <button onClick={() => setMenuOpen(false)}>Login</button>
-                </SignInButton>
-              </SignedOut>
-
-              <SignedIn>
+              {currentUser ? (
                 <div className="p-2">
-                  <UserButton afterSignOutUrl="/" />
+                  <UserDropdown />
                 </div>
-              </SignedIn>
+              ) : (
+                <>
+                  <button onClick={() => {openModal(true); setMenuOpen(false);}}>Login</button>
+                  <button onClick={() => {openModal(false); setMenuOpen(false);}}>Sign Up</button>
+                </>
+              )}
 
               {navConfig.map(({ label, to, isLive }) => (
                 <Link key={label} to={to} onClick={() => setMenuOpen(false)} className="text-lg p-2 flex items-center">
@@ -171,6 +163,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <AuthModal isOpen={modalOpen} setIsOpen={setModalOpen} isLogin={isLogin} />
     </>
   );
 };
