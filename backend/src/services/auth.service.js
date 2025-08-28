@@ -1,6 +1,8 @@
 
-import { auth } from '../config/firebase.js';
+import { auth , db} from '../config/firebase.js';
 import { ApiError } from '../utils/ApiError.js';
+import { mapAdminError } from '../utils/FirebaseErrorMapper.js';
+import { ROLES } from '../constants/roles.constant.js';
 
 /**
  * Creates a new user in Firebase Authentication.
@@ -9,19 +11,38 @@ import { ApiError } from '../utils/ApiError.js';
  * @returns {Promise<object>} The created user record.
  */
 const createUserInFirebase = async (email, password) => {
+  let userRecord
+
   try {
-    const userRecord = await auth.createUser({
+      userRecord = await auth.createUser({
       email,
       password,
     });
+
+    const userDoc = {
+      email: userRecord.email,
+      name: null,
+      role: ROLES.USER,
+      isVerified: false,
+      createdAt: Date.now(),
+    }
+
+    await db.collection('USERS').doc(userRecord.uid).set(userDoc)
+
+    await auth.setCustomUserClaims(userRecord.uid, { role: ROLES.USER })
+
     return userRecord;
   } catch (error) {
-    // https://firebase.google.com/docs/auth/admin/errors
-    if (error.code === 'auth/email-already-exists') {
-      throw new ApiError(409, 'The email address is already in use by another account.');
+    
+    if(userRecord?.uid){
+      await Promise.allSettled([
+        db.collection('USER').doc(userRecord.uid).delete(),
+        auth.deleteUser(userRecord.uid),
+      ])
     }
-    throw new ApiError(500, 'Error creating user in Firebase', [], error.stack);
-  }
+
+    throw mapAdminError(error)
+  }  
 };
 
 /**
