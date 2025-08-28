@@ -24,7 +24,7 @@ const register = asyncHandler(async (req, res) => {
   // Send a 201 Created response back to the client.
   return res.status(201).json(
     // Use the ApiResponse class for a consistent response format.
-    new ApiResponse(201, { uid: userRecord.uid, email: userRecord.email }, 'User created successfully')
+    new ApiResponse(201, { uid: userRecord.uid, email: userRecord.email,  }, 'User created successfully')
   );
 });
 
