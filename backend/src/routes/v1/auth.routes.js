@@ -1,3 +1,8 @@
+/**
+ * @file This file defines the routes specifically for user authentication functionalities.
+ * It maps HTTP endpoints like /register, /login, and /logout to their
+ * corresponding controller functions, which handle the core logic.
+ */
 
 import { Router } from "express";
 import { register, login } from "../../controllers/auth.controller.js";
