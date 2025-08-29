@@ -27,7 +27,7 @@ const createUserInFirebase = async (email, password) => {
       createdAt: Date.now(),
     }
 
-    await db.collection('USERS').doc(userRecord.uid).set(userDoc)
+    await db.collection('users').doc(userRecord.uid).set(userDoc)
 
     await auth.setCustomUserClaims(userRecord.uid, { role: ROLES.USER })
 
@@ -36,7 +36,7 @@ const createUserInFirebase = async (email, password) => {
     
     if(userRecord?.uid){
       await Promise.allSettled([
-        db.collection('USER').doc(userRecord.uid).delete(),
+        db.collection('users').doc(userRecord.uid).delete(),
         auth.deleteUser(userRecord.uid),
       ])
     }
