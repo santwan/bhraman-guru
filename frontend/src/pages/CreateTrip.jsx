@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import Input from '../../components/Input.jsx';
-import { SelectBudgetOptions, SelectTravelList } from '../../constants/option.jsx';
-import { generateTravelPlan } from '../../services/AIModel.jsx';
-import { useAuth } from '../../context/AuthContext.jsx';
-import { saveTripToFireStore } from '../../services/firestore.js';
+import Input from '../components/Input.jsx';
+import { SelectBudgetOptions, SelectTravelList } from '../constants/option.jsx';
+import { generateTravelPlan } from '../services/AIModel.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
+import { saveTripToFireStore } from '../services/firestore.js';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import AuthModal from '../../components/global/AuthModal.jsx';
+import AuthModal from '../components/AuthModal.jsx';
 
 function CreateTrip() {
   const [place, setPlace] = useState();

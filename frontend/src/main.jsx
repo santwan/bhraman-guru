@@ -1,46 +1,13 @@
-
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import CreateTrip from './pages/create-trip/CreateTrip.jsx'
-import Layout from './components/global/Layout.jsx'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { AuthProvider } from './context/AuthContext.jsx' // Import the new AuthProvider
-import MyTrips from './pages/my-trips/MyTrips.jsx'
-import TripHistory from './pages/my-trips/trip-history/TripHistory.jsx'
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Layout />, // Shared layout for all child routes
-    children: [
-      {
-        path: '/',
-        element: <App />
-      },
-      {
-        path: '/create-trip',
-        element: <CreateTrip />
-      },
-      {
-        path: '/my-trips',
-        element: <MyTrips />
-      },
-      {
-        path: '/trip-history',
-        element: <TripHistory/>
-      },
-      
-    ]
-  }
-])
+import './styles/index.css'   // 🔥 move css into /styles
+import AppRouter from './routes/AppRouter.jsx'  // centralized routes
+import { AuthProvider } from './context/AuthContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>  {/* Replace ClerkProvider with AuthProvider */}
-      
-      <RouterProvider router={router} />
+    <AuthProvider>
+      <AppRouter />
     </AuthProvider>
   </StrictMode>
 )
