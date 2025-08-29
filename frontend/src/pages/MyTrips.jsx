@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase/firebaseConfig";
-import { useAuth } from "../../context/AuthContext";
+import { db } from "../firebase/firebaseConfig";
+import { useAuth } from "../context/AuthContext";
 
 // Component imports
-import TripOverview from "../../components/my-trips/TripOverview.jsx";
-import HotelGrid from "../../components/my-trips/HotelGrid.jsx";
-import DailyItinerary from "../../components/my-trips/DailyItinerary.jsx";
-import { getPlaceImage } from "../../services/GlobalApi.jsx"; // ✅ Backend proxy version for hotels
+import TripOverview from "../components/my-trips/TripOverview.jsx";
+import HotelGrid from "../components/my-trips/HotelGrid.jsx";
+import DailyItinerary from "../components/my-trips/DailyItinerary.jsx";
+import { getPlaceImage } from "../services/GlobalApi.jsx"; // ✅ Backend proxy version for hotels
 
 export default function MyTrips() {
   const [searchParams] = useSearchParams();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { collection, query, where, getDocs, orderBy, deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../../firebase/firebaseConfig";
-import { useAuth } from "../../../context/AuthContext";
+import { db } from "../firebase/firebaseConfig";
+import { useAuth } from "../context/AuthContext.jsx";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Trash2 } from "lucide-react";
