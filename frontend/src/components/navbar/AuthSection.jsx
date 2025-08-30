@@ -1,27 +1,29 @@
-import ThemeToggle from "../ThemeToggle.jsx";
-import { useAuth } from "../../context/AuthContext.jsx";
-import UserDropdown from "../UserDropdown.jsx";
-import LoginButton from "../LoginButton.jsx";
-import SignupButton from "../SignupButton.jsx";
+import { useAuth } from "@/context/AuthContext.jsx";
+import { useAuthModal } from "@/context/AuthModalContext.jsx";
+import UserDropdown from "@/components/UserDropdown.jsx";
+import ThemeToggle from "@/components/ThemeToggle.jsx";
 
-export default function AuthSection({ hidden }) {
+const LoginButton = ({ onClick }) => (
+  <button 
+    onClick={onClick}
+    className="px-4 py-2 rounded-md font-semibold bg-[#1A4D8F] text-white hover:bg-opacity-90"
+  >
+    Login
+  </button>
+);
+
+export default function AuthSection() {
   const { currentUser } = useAuth();
+  const { setAuthModalOpen } = useAuthModal();
 
   return (
-    <div
-      className={`hidden lg:flex items-center space-x-2 transition-opacity duration-300 ${
-        hidden ? "opacity-0 pointer-events-none" : "opacity-100"
-      }`}
-    >
-      <ThemeToggle />
+    <div className="flex items-center space-x-4">
       {currentUser ? (
         <UserDropdown />
       ) : (
-        <>
-          <LoginButton />
-          <SignupButton />
-        </>
+        <LoginButton onClick={() => setAuthModalOpen(true)} />
       )}
+      <ThemeToggle />
     </div>
   );
 }

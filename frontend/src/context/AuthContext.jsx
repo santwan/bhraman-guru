@@ -1,46 +1,41 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { auth } from '../firebase/firebaseConfig'; // Adjust this path to your Firebase config
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '@/firebase/firebaseConfig';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const signup = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
-
-  const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
-  };
-
+  // The logout function now uses the signOut method from the compat auth object
   const logout = () => {
-    return signOut(auth);
+    return auth.signOut();
   };
 
+  // This effect hook listens for changes in the user's authentication state.
+  // onAuthStateChanged is the core of Firebase Authentication's session management.
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
       setLoading(false);
     });
 
+    // Unsubscribe from the listener when the component unmounts
     return unsubscribe;
   }, []);
 
   const value = {
-    user,
-    signup,
-    login,
+    currentUser,
     logout,
     loading
   };
 
   return (
     <AuthContext.Provider value={value}>
+      {/* We only render the children once the initial auth state has been determined */}
       {!loading && children}
     </AuthContext.Provider>
   );

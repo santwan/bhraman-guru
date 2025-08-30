@@ -1,8 +1,8 @@
 import React from "react";
-import HeroSection from "../components/HeroSection.jsx";
-import TestimonialSection from "../components/TestimonialSection.jsx";
-import BenefitSection from "../components/BenefitSection.jsx";
-import Footer from "../components/Footer.jsx";
+import HeroSection from "@/components/HeroSection.jsx";
+import TestimonialSection from "@/components/TestimonialSection.jsx";
+import BenefitSection from "@/components/BenefitSection.jsx";
+import Footer from "@/components/Footer.jsx";
 
 
 const Home = () => {

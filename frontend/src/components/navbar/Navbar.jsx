@@ -1,59 +1,69 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import Logo from "./Logo.jsx";
-import NavLinks from "./NavLinks.jsx";
-import AuthSection from "./AuthSection.jsx";
-import MobileMenu from "./MobileMenu.jsx";
-import FloatingNavbar from "./FloatingNavbar.jsx";
-import { navConfig } from "../../utils/navConfig.js";
+import Logo from "@/components/navbar/Logo.jsx";
+import NavLinks from "@/components/navbar/NavLinks.jsx";
+import AuthSection from "@/components/navbar/AuthSection.jsx";
+import MobileMenu from "@/components/navbar/MobileMenu.jsx";
+import FloatingNavbar from "@/components/navbar/FloatingNavbar.jsx";
+import { navConfig } from "@/utils/navConfig.js";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 600);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <>
-      <nav
-        className={`transition-all duration-300 ${
-          scrolled
-            ? "h-5 bg-transparent"
-            : "h-auto bg-white dark:bg-[#0d0d0d] border-b border-gray-200 dark:border-gray-800"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 flex justify-between items-center">
-          <Logo hidden={scrolled} />
-          <NavLinks navConfig={navConfig} hidden={scrolled} />
-          <AuthSection hidden={scrolled} />
-
-          {/* Mobile toggle (shows below lg) */}
-          <div
-            className={`lg:hidden z-50 transition-opacity duration-300 ${
-              scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
-            }`}
+      <AnimatePresence>
+        {!scrolled && (
+          <motion.nav
+            initial={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-5 left-1/2 -translate-x-1/2 z-40 p-4 w-[95%] max-w-7xl mx-auto
+                       bg-black/10 backdrop-blur-md 
+                       rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
           >
-            <button onClick={() => setMenuOpen(!menuOpen)}>
-              {menuOpen ? (
-                <X className="text-[#1A4D8F]" />
-              ) : (
-                <Menu className="text-[#1A4D8F]" />
-              )}
-            </button>
-          </div>
-        </div>
+            <div className="flex justify-between items-center">
+              <Logo />
 
-        <AnimatePresence>
-          {menuOpen && (
-            <MobileMenu navConfig={navConfig} setMenuOpen={setMenuOpen} />
-          )}
-        </AnimatePresence>
-      </nav>
+              <div className="hidden lg:flex items-center space-x-8">
+                <NavLinks navConfig={navConfig} />
+                <AuthSection />
+              </div>
+
+              {/* Mobile toggle (shows below lg) */}
+              <div className="lg:hidden z-50">
+                <button onClick={() => setMenuOpen(!menuOpen)}>
+                  {menuOpen ? (
+                    <X className="text-[#1A4D8F]" />
+                  ) : (
+                    <Menu className="text-[#1A4D8F]" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            <AnimatePresence>
+              {menuOpen && (
+                <MobileMenu 
+                  navConfig={navConfig} 
+                  setMenuOpen={setMenuOpen} 
+                />
+              )}
+            </AnimatePresence>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+
+      {/* Spacer to prevent content from being hidden behind the fixed navbar */}
+      <div className="h-28" />
 
       <FloatingNavbar scrolled={scrolled} navConfig={navConfig} />
     </>

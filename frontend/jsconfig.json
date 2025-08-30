@@ -1,13 +1,19 @@
 {
-    "files": [],
-    "references": [
-        
-    ],
-    "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "@/*": ["./src/*"]
-      }
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["./*"]
     }
-  }
-  
+  },
+  "exclude": ["node_modules", "dist"]
+}
+
+
+
+/*
+This small but powerful file does one simple thing: it tells your entire development environment (including your IDE's IntelliSense and ESLint) to recognize the @ alias.
+
+"baseUrl": "src" sets the root for your imports to the src folder.
+"paths": { "@/*": ["./*"] } maps the @/ prefix to the src/ directory.
+You can now refactor your existing import statements to be much cleaner.
+*/

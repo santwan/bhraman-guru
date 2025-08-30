@@ -1,6 +1,6 @@
 // components/ImageFromPlaceId.jsx
 import { useEffect, useState } from "react";
-import { getPlaceImage } from "../services/GlobalApi";
+import { getPlaceImage } from "@/services/GlobalApi";
 
 export default function ImageFromPlaceId({ placeId, alt = "Place", className = "" }) {
   const [imageUrl, setImageUrl] = useState(null);

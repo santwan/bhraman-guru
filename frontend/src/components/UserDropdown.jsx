@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useAuth } from "../context/AuthContext.jsx";
+import { useAuth } from "@/context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { LogOut, History, User } from 'lucide-react';
 
 const UserDropdown = () => {
-  const { user, logout } = useAuth();
+  const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -23,6 +23,11 @@ const UserDropdown = () => {
     navigate("/trip-history");
   };
 
+  const handleProfile = () => {
+    setIsOpen(false);
+    navigate("/profile");
+  };
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -36,7 +41,7 @@ const UserDropdown = () => {
     };
   }, [dropdownRef]);
 
-  if (!user) {
+  if (!currentUser) {
     return null;
   }
 
@@ -61,6 +66,13 @@ const UserDropdown = () => {
             >
               <History className="mr-3 h-5 w-5 text-gray-400" />
               <span>Trip History</span>
+            </button>
+            <button
+              onClick={handleProfile}
+              className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <User className="mr-3 h-5 w-5 text-gray-400" />
+              <span>Profile</span>
             </button>
             <button
               onClick={handleLogout}

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import TestimonialCard from "./TestimonialCard";
-import testimonials from "../data/testimonial.json";
+import TestimonialCard from "@/components/TestimonialCard";
+import testimonials from "@/data/testimonial.json";
 
 export default function TestimonialSection() {
   const [index, setIndex] = useState(0);
@@ -85,7 +85,3 @@ export default function TestimonialSection() {
     </section>
   );
 }
-
-
-
-

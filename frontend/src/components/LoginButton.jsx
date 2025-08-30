@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AuthModal from "./AuthModal.jsx";
+import AuthModal from "@/components/AuthModal.jsx";
 
 const LoginButton = () => {
   const [showModal, setShowModal] = useState(false);

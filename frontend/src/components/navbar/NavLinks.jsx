@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function NavLinks({ navConfig, hidden }) {
   return (
     <div
-      className={`hidden lg:flex space-x-6 pt-4 text-black dark:text-white font-medium transition-opacity duration-300 ${
+      className={`hidden lg:flex space-x-6 text-black dark:text-white font-medium transition-opacity duration-300 ${
         hidden ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
@@ -15,7 +15,7 @@ export default function NavLinks({ navConfig, hidden }) {
         >
           {label}
           {isLive && (
-            <span className="ml-2 h-2 w-2 rounded-full bg-green-400 animate-pulse" />
+            <span className="ml-2 h-3 w-3 rounded-full bg-green-400 animate-pulse" />
           )}
         </Link>
       ))}
