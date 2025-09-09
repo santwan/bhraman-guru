@@ -10,6 +10,7 @@ import AuthModal from "@/components/AuthModal.jsx";
 import { useCreateTrip } from "./useCreateTrip.js";
 import { useAnimation } from "@/hooks/useAnimation.js";
 import { useAuth } from "@/context/auth";
+import { Outlet } from "react-router-dom";
 
 const CreateTrip = () => {
     const {
@@ -38,6 +39,7 @@ const CreateTrip = () => {
             <TravelerSelector formData={formData} handleInputChange={handleInputChange} />
             <GenerateButton onGenerateTrip={onGenerateTrip} loading={loading || authLoading} />
           </motion.div>
+          <Outlet/>
     
           {showAuthModal && <AuthModal isLogin={true} onClose={closeAuthModal} />}
         </motion.div>
