@@ -23,16 +23,17 @@ const routes = [
             <CreateTrip />
           </ProtectedRoute>
         ),
-        children: [
-          {
-            path: 'view-trip',
-            element: (
-              <ProtectedRoute>
-                <ViewTrip />
-              </ProtectedRoute>
-            ),
-          },
-        ],
+      },
+      {
+        path: '/create-trip/view-trip',
+        element: (
+          <ProtectedRoute>
+            <ViewTrip />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/login'
       },
       {
         path: '/my-trips',

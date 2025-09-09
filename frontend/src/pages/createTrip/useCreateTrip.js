@@ -77,7 +77,14 @@ export const useCreateTrip = () => {
                 toast.error("Something went wrong, the plan could not be generated");
                 return;
             }
-            navigate("view-trip", { state: { plan } });
+
+            try {
+                sessionStorage.setItem('plan', JSON.stringify(plan));
+
+            } catch(err){
+                console.warn('Could not save plan to sessionStorage', err)
+            }
+            navigate("/create-trip/view-trip", { state: { plan } });
 
         } catch (err) {
             console.error(err);

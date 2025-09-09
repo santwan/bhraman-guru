@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 function ViewTrip() {
+
   const location = useLocation();
-  const { plan } = location.state || {};
+  const [plan, setPlan] = useState( () => {
+
+    return (location.state && location.state.plan ) || null
+  })
+
+  useEffect(() => {
+
+    if(plan) {
+      return
+    }
+
+    try {
+      const stored = sessionStorage.getItem('latest_trip_plan')
+      if(stored){
+        setPlan(JSON.parse(stored))
+      }
+
+    } catch (err) {
+      console.log('Failed to read plan from sessionStorage', err)
+    }
+    
+  }, [plan])
 
   return (
     <div className="p-4">
