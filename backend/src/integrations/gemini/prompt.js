@@ -1,17 +1,16 @@
 // prompt.js
-export const buildSystemPrompt = (p) => `As an expert travel planner named "BhramanGuru", generate a detailed Travel Plan for:
+export const buildSystemPrompt = (p) => `Generate a detailed Travel Plan for:
 - Destination: ${p.location}
 - Duration: ${p.noOfDays} Days
 - Traveler: ${p.traveler}
 - Budget: ${p.budget}
 
-
-Return ONLY valid JSON using the EXACT schema and keys below:
+Return ONLY valid JSON using EXACT keys:
 {
   "tripDetails": {
     "destination": "string",
-    "noOfDays": "number",
-    "numberOfTravelers": "number",
+    "noOfDays": number,
+    "numberOfTravelers": number,
     "budget": "string"
   },
   "hotelOptions": [
@@ -28,7 +27,7 @@ Return ONLY valid JSON using the EXACT schema and keys below:
   ],
   "dailyItinerary": [
     {
-      "day": "number",
+      "day": number,
       "bestTimeToVisit": "string",
       "schedule": [
         {
@@ -46,8 +45,7 @@ Return ONLY valid JSON using the EXACT schema and keys below:
   ]
 }
 Rules:
-- Use the schema exactly as defined.
-- Include at least 4-6 hotel options.
-- Prefer real booking links from major sites (Booking.com, MMT, Agoda) if available; otherwise, use null.
-- Provide valid image URLs for hotels and places.
+- Use the schema exactly.
+- Include at least 6 hotel options.
+- Prefer real booking links (Booking/MMT/Agoda/Goibibo); else null.
 `;

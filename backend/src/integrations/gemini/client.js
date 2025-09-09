@@ -1,49 +1,43 @@
-import { GoogleGenAI, Models } from "@google/genai";
+// client.js
+import { GoogleGenAI } from "@google/genai";
 import { env } from "../../config/env.js";
-import { MODEL, DEFAULT_RESPONSE_MIME, DEFAULT_TEMPERATURE } from "./constants.js";
+import { MODEL, DEFAULT_TEMPERATURE, DEFAULT_RESPONSE_MIME } from "./constants.js";
 
-// Initialize the AI client once with the API key and reuse it.
-const ai = new GoogleGenAI({apiKey: env.GEMINI_API_KEY});
+let aiInstance = null;
 
-
+export const getAI = () => {
+  if (!aiInstance) {
+    aiInstance = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY });
+  }
+  return aiInstance;
+};
 
 /**
- * Generates content using the Gemini API with a one-shot, non-streaming request.
- * This is the correct pattern for the `@google/genai` SDK for this use case.
- *
- * @param {object} params - The parameters for the content generation.
- * @param {Array} params.contents - The conversation history/prompt for the model.
- * @param {object} params.config - Optional configuration overrides (e.g., temperature).
- * @returns {Promise<string>} The text response from the AI model.
+ * One-shot content generation using generateContent()
+ * - contents: array of role/parts objects (same shape you used)
+ * - config: optional override (temperature, thinkingConfig, etc.)
  */
-
 export const generateContent = async ({ contents, config = {} }) => {
-  try {
-    // Prepare the generation configuration, applying defaults and allowing overrides.
-    const generationConfig = {
-      responseMimeType: config.responseMimeType || DEFAULT_RESPONSE_MIME,
-      temperature: config.temperature || DEFAULT_TEMPERATURE,
-      ...config,
-    };
+  const ai = getAI();
+  const finalConfig = {
+    responseMimeType: DEFAULT_RESPONSE_MIME,
+    temperature: DEFAULT_TEMPERATURE,
+    ...config,
+  };
 
-    // Call the `generateContent` method with the prompt contents and config.
-    const result = await ai.models.generateContent({
-        model: MODEL,
-      contents: contents,
-      generationConfig: generationConfig,
-    });
+  const response = await ai.models.generateContent({
+    model: MODEL,
+    contents,
+    config: finalConfig,
+  });
 
-
-
-    if (!result) {
-      throw new Error("AI returned an empty response.");
-    }
-
-    return result;
-
-  } catch (error) {
-    // Provide detailed error logging for the backend and a generic error for the caller.
-    console.error("Error in generateContent from Gemini client:", error);
-    throw new Error("The AI model failed to generate a response.");
+  // The SDK returns the full response. Different SDK versions might place text on response.text
+  // or response.output[0]?.content[0]?.text — use response.text when available.
+  if (response?.text) return response.text;
+  // Fallback: try to reduce the most-likely field
+  if (Array.isArray(response?.candidates) && response.candidates[0]?.content?.[0]?.text) {
+    return response.candidates[0].content[0].text;
   }
+  // Last-resort: return JSON.stringify of entire response for debugging
+  return JSON.stringify(response);
 };
