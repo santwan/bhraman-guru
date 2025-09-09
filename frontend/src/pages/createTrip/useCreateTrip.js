@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "@/context/auth";
 import { generateTravelPlan } from "@/services/AIModel";
-import { saveTripToFireStore } from "@/services/firestore";
 import { validateTripInputs } from "./validateTripInputs";
 
 const initialFormData = {
@@ -74,19 +73,15 @@ export const useCreateTrip = () => {
 
         try {
             const plan = await generateTravelPlan(tripData);
-
-            // const tripId = await saveTripToFireStore({
-            //     userId: user.uid,
-            //     input: tripData,
-            //     plan,
-            // });
-
-            toast.success("Trip Plan generated successfully!");
-            setTimeout(() => navigate(`/my-trips?tripId=${tripId}`), 1500);
+            if (!plan) {
+                toast.error("Something went wrong, the plan could not be generated");
+                return;
+            }
+            navigate("/view-trip", { state: { plan } });
 
         } catch (err) {
             console.error(err);
-            toast.error("Something went wrong while generating the trip.");
+            toast.error(err.message);
         } finally {
             setLoading(false);
         }
