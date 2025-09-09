@@ -5,7 +5,7 @@ import { env } from "../config/env.js";
 // Initialize once
 const ai = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY });
 
-const MODEL = "gemini-2.5-flash"; // or your preferred 2.x model
+const MODEL = "gemini-2.5-flash"; 
 
 const SYSTEM = (p) => `
 Generate a detailed Travel Plan for:

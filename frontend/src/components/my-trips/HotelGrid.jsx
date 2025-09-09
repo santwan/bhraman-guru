@@ -13,4 +13,4 @@ const HotelGrid = ({ hotelOptions }) => (
   </section>
 );
 
-export default HotelGrid;
+export default HotelGrid; 

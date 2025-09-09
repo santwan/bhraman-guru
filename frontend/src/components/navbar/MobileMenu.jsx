@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle.jsx";
-import { useAuth } from "@/context/AuthContext.jsx";
-import { useAuthModal } from "@/context/AuthModalContext.jsx";
+import { useAuth } from "@/context/auth";
+import { useAuthModal } from "@/context/authModal";
 import UserDropdown from "@/components/UserDropdown.jsx";
 import { navConfig } from "@/utils/navConfig.js";
 

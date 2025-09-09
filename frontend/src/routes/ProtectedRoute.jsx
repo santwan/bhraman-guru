@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext.jsx';
-import { useAuthModal } from '@/context/AuthModalContext.jsx';
+import { useAuth } from '@/context/auth';
+import { useAuthModal } from '@/context/authModal';
 
 export default function ProtectedRoute({ children }) {
   const { currentUser } = useAuth();

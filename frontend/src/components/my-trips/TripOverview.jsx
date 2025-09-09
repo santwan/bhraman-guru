@@ -9,4 +9,3 @@ const TripOverview = ({ tripDetails }) => (
   );
   
   export default TripOverview;
-  

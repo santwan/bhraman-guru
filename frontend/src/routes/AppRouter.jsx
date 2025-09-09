@@ -1,12 +1,12 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from '@/components/Layout.jsx';
 import Home from '@/pages/Home.jsx';
-import CreateTrip from '@/pages/CreateTrip.jsx';
+import CreateTrip from '@/pages/createTrip/CreateTrip.jsx';
 import MyTrips from '@/pages/MyTrips.jsx';
 import TripHistory from '@/pages/TripHistory.jsx';
 import Profile from '@/pages/Profile.jsx';
 import Auth from '@/components/auth/Auth.jsx';
-import { useAuthModal } from '@/context/AuthModalContext.jsx';
+import { useAuthModal } from '@/context/authModal';
 import ProtectedRoute from '@/routes/ProtectedRoute.jsx';
 
 const routes = [

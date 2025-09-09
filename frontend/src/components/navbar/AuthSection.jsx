@@ -1,5 +1,5 @@
-import { useAuth } from "@/context/AuthContext.jsx";
-import { useAuthModal } from "@/context/AuthModalContext.jsx";
+import { useAuth } from "@/context/auth";
+import { useAuthModal } from "@/context/authModal";
 import UserDropdown from "@/components/UserDropdown.jsx";
 import ThemeToggle from "@/components/ThemeToggle.jsx";
 
