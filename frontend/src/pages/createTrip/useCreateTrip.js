@@ -74,11 +74,12 @@ export const useCreateTrip = () => {
 
         try {
             const plan = await generateTravelPlan(tripData);
-            const tripId = await saveTripToFireStore({
-                userId: user.uid,
-                input: tripData,
-                plan,
-            });
+
+            // const tripId = await saveTripToFireStore({
+            //     userId: user.uid,
+            //     input: tripData,
+            //     plan,
+            // });
 
             toast.success("Trip Plan generated successfully!");
             setTimeout(() => navigate(`/my-trips?tripId=${tripId}`), 1500);

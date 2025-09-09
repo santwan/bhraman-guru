@@ -9,9 +9,13 @@ export async function generateTravelPlan(input) {
     body: JSON.stringify(input),
   });
 
-  const data = await res.json();
+  const responseData = await res.json();
 
-  if (!res.ok) throw new Error(data?.error || res.statusText);
+  if (!res.ok) {
+    const message = responseData.message || res.statusText;
+    const errors = responseData.errors ? `: ${responseData.errors.join(", ")}` : "";
+    throw new Error(`${message}${errors}`);
+  }
 
-  return data;
+  return responseData.data;
 }
