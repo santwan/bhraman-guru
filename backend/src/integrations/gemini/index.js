@@ -21,12 +21,19 @@ export const generateTripPlanJSON = async (payload, opts = {}) => {
     { role: "user", parts: [{ text: user }] },
   ];
 
-  const raw = await generateContent({ contents, config: opts.config ?? {} });
+  // As you discovered, this returns the full GenerateContentResponse object.
+  const response = await generateContent({ contents, config: opts.config ?? {} });
 
-  // parse & validate
-  const parsed = parseJSON(raw);
+  // For debugging, let's log the raw response object.
+  console.log("Raw model output:", response);
 
-  // optional: run light validation (throws on failure)
+  // Extract the text content from the response object before parsing.
+  const rawText = response.text();
+
+  // Parse & validate the extracted text.
+  const parsed = parseJSON(rawText);
+
+  // Optional: run light validation (throws on failure).
   validateTopLevel(parsed);
 
   return parsed;
