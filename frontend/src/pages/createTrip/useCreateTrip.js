@@ -77,7 +77,7 @@ export const useCreateTrip = () => {
                 toast.error("Something went wrong, the plan could not be generated");
                 return;
             }
-            navigate("/view-trip", { state: { plan } });
+            navigate("view-trip", { state: { plan } });
 
         } catch (err) {
             console.error(err);
