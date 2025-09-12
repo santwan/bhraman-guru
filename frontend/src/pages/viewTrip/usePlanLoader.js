@@ -59,7 +59,8 @@ export default function usePlanLoader({ location }) {
                         try {
                             const hotelInfo = { name: hotel.hotelName, address: hotel.hotelAddress };
                             const url = await getHotelImage(hotelInfo);
-                            const enhancedHotel = { ...hotel, hotelImageUrl: url || "" };
+                            const cacheBustedUrl = url ? `${url}&timestamp=${Date.now()}` : "";
+                            const enhancedHotel = { ...hotel, hotelImageUrl: cacheBustedUrl };
                             console.log("Processed hotel:", JSON.stringify(enhancedHotel, null, 2));
                             return enhancedHotel;
                         } catch (err) {
