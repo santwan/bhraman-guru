@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@google/genai": "^0.8.0",
+    "@lottiefiles/dotlottie-react": "^0.16.1",
     "firebase": "^10.14.1",
     "firebaseui": "^6.1.0",
     "framer-motion": "^12.7.3",

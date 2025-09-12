@@ -11,6 +11,7 @@ import { useCreateTrip } from "./useCreateTrip.js";
 import { useAnimation } from "@/hooks/useAnimation.js";
 import { useAuth } from "@/context/auth";
 import { Outlet } from "react-router-dom";
+import GeneratingTrip from "@/components/create-trip/GeneratingTrip.jsx";
 
 const CreateTrip = () => {
     const {
@@ -25,6 +26,10 @@ const CreateTrip = () => {
     const pageAnimation = useAnimation("fadeInBottom", 0.2, 0.6)
 
     const { loading: authLoading } = useAuth();
+
+    if (loading || authLoading) {
+        return <GeneratingTrip />;
+    }
 
     return (
         <motion.div
