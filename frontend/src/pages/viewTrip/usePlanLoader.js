@@ -44,14 +44,6 @@ export default function usePlanLoader({ location }) {
     }, [plan]);
 
     useEffect(() => {
-        console.log("Raw 'plan' state updated:", plan);
-    }, [plan]);
-
-    useEffect(() => {
-        console.log("Memoized 'normalizedPlan' updated:", normalizedPlan);
-    }, [normalizedPlan]);
-
-    useEffect(() => {
         if (!normalizedPlan || enhancementRan.current) return;
         enhancementRan.current = true;
 
@@ -106,6 +98,7 @@ export default function usePlanLoader({ location }) {
                     dailyItinerary: enhancedItinerary,
                 };
 
+                console.log("Final plan object right before setting state:", JSON.stringify(finalEnhancedPlan, null, 2));
                 setPlan(finalEnhancedPlan);
 
             } catch (err) {
