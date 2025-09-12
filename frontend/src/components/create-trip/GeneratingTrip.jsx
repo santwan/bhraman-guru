@@ -5,7 +5,7 @@ const GeneratingTrip = () => {
   return (
     <div className="flex flex-col items-center justify-center h-full w-full">
       <DotLottieReact
-        src="/lottie/plane-loader.lottie"
+        src="/Material wave loading.webm"
         loop
         autoplay
       />
