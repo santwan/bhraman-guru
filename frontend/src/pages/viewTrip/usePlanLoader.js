@@ -49,62 +49,38 @@ export default function usePlanLoader({ location }) {
 
         let cancelled = false;
 
-        const enhancePlan = async () => {
+        const enhanceHotelImages = async () => {
             setLoading(true);
             try {
-                const planToEnhance = JSON.parse(JSON.stringify(normalizedPlan));
+                const hotelsToEnhance = JSON.parse(JSON.stringify(normalizedPlan.hotelOptions));
 
-                const enhancedHotelsPromise = Promise.all(
-                    planToEnhance.hotelOptions.map(async (hotel) => {
+                const enhancedHotels = await Promise.all(
+                    hotelsToEnhance.map(async (hotel) => {
+                        // If the image URL already exists, skip the API call
+                        if (hotel.hotelImageUrl) {
+                            return hotel;
+                        }
                         try {
                             const hotelInfo = { name: hotel.hotelName, address: hotel.hotelAddress };
                             const url = await getHotelImage(hotelInfo);
-                            return { ...hotel, hotelImageUrl: url || hotel.hotelImageUrl || "" };
+                            return { ...hotel, hotelImageUrl: url || "" };
                         } catch (err) {
-                            console.warn("Error fetching hotel image:", err);
-                            return hotel;
+                            console.warn(`Error fetching image for hotel: ${hotel.hotelName}`, err);
+                            return { ...hotel, hotelImageUrl: "" }; // Return with empty string on error
                         }
                     })
                 );
-
-                const enhancedItineraryPromise = Promise.all(
-                    planToEnhance.dailyItinerary.map(async (day) => {
-                        if (!Array.isArray(day.schedule)) {
-                            return { ...day, schedule: [] };
-                        }
-                        const enhancedSchedule = await Promise.all(
-                            day.schedule.map(async (place) => {
-                                if (place.placeImageUrl) return place;
-                                try {
-                                    const url = await getPlaceImage(place.placeName);
-                                    return { ...place, placeImageUrl: url || "" };
-                                } catch (err) {
-                                    console.warn("Error fetching place image:", err);
-                                    return place;
-                                }
-                            })
-                        );
-                        return { ...day, schedule: enhancedSchedule };
-                    })
-                );
-
-                const [enhancedHotels, enhancedItinerary] = await Promise.all([
-                    enhancedHotelsPromise,
-                    enhancedItineraryPromise,
-                ]);
 
                 if (cancelled) return;
 
-                const finalEnhancedPlan = {
-                    ...planToEnhance,
+                setPlan(prevPlan => ({
+                    ...prevPlan,
                     hotelOptions: enhancedHotels,
-                    dailyItinerary: enhancedItinerary,
-                };
-
-                setPlan(finalEnhancedPlan);
+                    dailyItinerary: prevPlan.dailyItinerary // Ensure itinerary is not lost
+                }));
 
             } catch (err) {
-                console.warn("Failed enhancing plan data", err);
+                console.warn("Failed enhancing hotel data", err);
             } finally {
                 if (!cancelled && isMounted.current) {
                     setLoading(false);
@@ -112,7 +88,7 @@ export default function usePlanLoader({ location }) {
             }
         };
 
-        enhancePlan();
+        enhanceHotelImages();
 
         return () => {
             cancelled = true;
