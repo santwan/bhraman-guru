@@ -30,6 +30,8 @@ export default function ViewTrip() {
 
   const [tab, setTab] = useState("overview");
 
+  console.log("normalizedPlan in ViewTrip:", JSON.stringify(normalizedPlan, null, 2));
+
   if (loading) return <p className="p-4">Loading trip preview...</p>;
   if (!normalizedPlan) return <p className="p-4 text-red-500">No trip plan to display. Please generate a trip first.</p>;
 

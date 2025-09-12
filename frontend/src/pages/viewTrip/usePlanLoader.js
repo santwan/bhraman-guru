@@ -50,6 +50,7 @@ export default function usePlanLoader({ location }) {
         let cancelled = false;
 
         const enhanceHotelImages = async () => {
+            console.log("Initial plan before enhancement:", JSON.stringify(normalizedPlan, null, 2));
             setLoading(true);
             try {
                 const hotelsToEnhance = JSON.parse(JSON.stringify(normalizedPlan.hotelOptions));
@@ -59,9 +60,7 @@ export default function usePlanLoader({ location }) {
                         try {
                             const hotelInfo = { name: hotel.hotelName, address: hotel.hotelAddress };
                             const url = await getHotelImage(hotelInfo);
-                            const cacheBustedUrl = url ? `${url}&timestamp=${Date.now()}` : "";
-                            const enhancedHotel = { ...hotel, hotelImageUrl: cacheBustedUrl };
-                            console.log("Processed hotel:", JSON.stringify(enhancedHotel, null, 2));
+                            const enhancedHotel = { ...hotel, hotelImageUrl: url || "" };
                             return enhancedHotel;
                         } catch (err) {
                             console.warn(`Error fetching image for hotel: ${hotel.hotelName}`, err);
@@ -72,15 +71,13 @@ export default function usePlanLoader({ location }) {
 
                 if (cancelled) return;
 
-                console.log("Final enhanced hotels array:", JSON.stringify(enhancedHotels, null, 2));
-
                 setPlan(prevPlan => {
                     const newPlan = {
                         ...prevPlan,
                         hotelOptions: enhancedHotels,
                         dailyItinerary: prevPlan.dailyItinerary
                     };
-                    console.log("Setting new plan state:", JSON.stringify(newPlan, null, 2));
+                    console.log("Final plan after enhancement:", JSON.stringify(newPlan, null, 2));
                     return newPlan;
                 });
 
