@@ -22,17 +22,24 @@ export default function ViewTrip() {
   const { user } = useAuth();
 
   // The hook now handles its own data loading from sessionStorage
+  // `plan` will be the original object parsed from sessionStorage and mutated in-place by the hook.
   const { plan, normalizedPlan, loading } = usePlanLoader();
 
   // Save logic extracted
-  const { saving, saveTrip } = useSaveTrip({ user, plan: normalizedPlan, navigate });
+  // Use the raw `plan` (not only normalizedPlan) to ensure the saved object includes in-place mutations
+  // (e.g. hotelImageUrl that were written back to sessionStorage).
+  const { saving, saveTrip } = useSaveTrip({ user, plan, navigate });
 
   const [tab, setTab] = useState("overview");
 
   if (loading) return <p className="p-4">Loading trip preview...</p>;
   if (!normalizedPlan) return <p className="p-4 text-red-500">No trip plan to display. Please generate a trip first.</p>;
 
+  // defensive destructure with defaults
   const { tripDetails = {}, hotelOptions = [], dailyItinerary = [] } = normalizedPlan;
+
+  const numDays = tripDetails.noOfDays ?? tripDetails.noOfDays === 0 ? tripDetails.noOfDays : null;
+  const numTravellers = tripDetails.numberOfTravelers ?? tripDetails.travelers ?? 1;
 
   return (
     <div className="max-w-5xl pt-50 mx-auto px-4 md:pt-40 pb-10">
@@ -40,7 +47,7 @@ export default function ViewTrip() {
         <div>
           <h1 className="text-3xl font-bold">{tripDetails.destination || "Untitled Trip"}</h1>
           <p className="text-sm text-gray-500 mt-1">
-            {tripDetails.noOfDays ? `${tripDetails.noOfDays} day(s)` : null} • {tripDetails.numberOfTravelers} traveler(s)
+            {numDays ? `${numDays} day(s)` : null} {numDays ? " • " : ""}{numTravellers} traveler(s)
           </p>
         </div>
 
@@ -65,6 +72,7 @@ export default function ViewTrip() {
 
         {tab === "hotels" && (
           hotelOptions && hotelOptions.length ? (
+            // pass hotelOptions — they will update as images are fetched
             <HotelGrid hotelOptions={hotelOptions} />
           ) : (
             <p className="p-4 text-gray-600">No hotel options available in this plan.</p>
