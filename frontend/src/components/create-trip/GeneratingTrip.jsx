@@ -7,7 +7,7 @@ const GeneratingTrip = () => {
 
   const messages = [
     { percent: 0, text: "Hold on, we're crafting your journey..." },
-    { percent: 25, text: "Scanning for the best flights..." },
+    { percent: 25, text: "Scanning for the best time to visit..." },
     { percent: 50, text: "Finding the perfect hotels for you..." },
     { percent: 75, text: "Curating a list of must-see attractions..." },
   ];
@@ -28,7 +28,7 @@ const GeneratingTrip = () => {
 
         return newPercent;
       });
-    }, 100); // Update every 100ms for a smoother feel
+    }, 200); // Update every 100ms for a smoother feel
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
