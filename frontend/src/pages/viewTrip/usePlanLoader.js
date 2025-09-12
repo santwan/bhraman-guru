@@ -140,9 +140,11 @@ export default function usePlanLoader( { location } ) {
                                         name: h.hotelName,
                                         address: h.hotelAddress
                                     }
-                                    console.log(hotelInfo);
+                                    
                                     const url = await getHotelImage(hotelInfo);
-                                    return { ...h, hotelImageUrl: url || h.hotelImageUrl || ""}
+                                    console.log(hotelInfo, url)
+                                
+                                    return { ...h, hotelImageUrl: url || ""}
 
                                 } catch (err){
                                     console.log("Error happens while fetching hotels images", err)
