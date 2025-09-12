@@ -56,28 +56,32 @@ export default function usePlanLoader({ location }) {
 
                 const enhancedHotels = await Promise.all(
                     hotelsToEnhance.map(async (hotel) => {
-                        // If the image URL already exists, skip the API call
-                        if (hotel.hotelImageUrl) {
-                            return hotel;
-                        }
                         try {
                             const hotelInfo = { name: hotel.hotelName, address: hotel.hotelAddress };
                             const url = await getHotelImage(hotelInfo);
-                            return { ...hotel, hotelImageUrl: url || "" };
+                            const enhancedHotel = { ...hotel, hotelImageUrl: url || "" };
+                            console.log("Processed hotel:", JSON.stringify(enhancedHotel, null, 2));
+                            return enhancedHotel;
                         } catch (err) {
                             console.warn(`Error fetching image for hotel: ${hotel.hotelName}`, err);
-                            return { ...hotel, hotelImageUrl: "" }; // Return with empty string on error
+                            return { ...hotel, hotelImageUrl: "" };
                         }
                     })
                 );
 
                 if (cancelled) return;
 
-                setPlan(prevPlan => ({
-                    ...prevPlan,
-                    hotelOptions: enhancedHotels,
-                    dailyItinerary: prevPlan.dailyItinerary // Ensure itinerary is not lost
-                }));
+                console.log("Final enhanced hotels array:", JSON.stringify(enhancedHotels, null, 2));
+
+                setPlan(prevPlan => {
+                    const newPlan = {
+                        ...prevPlan,
+                        hotelOptions: enhancedHotels,
+                        dailyItinerary: prevPlan.dailyItinerary
+                    };
+                    console.log("Setting new plan state:", JSON.stringify(newPlan, null, 2));
+                    return newPlan;
+                });
 
             } catch (err) {
                 console.warn("Failed enhancing hotel data", err);
