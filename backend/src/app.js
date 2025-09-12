@@ -20,7 +20,7 @@ app.use(helmet())
 //Configure CORS to allow request only from specified frontend URL
 // 'credentials' indicates whether the browser should include cookies in the request
 app.use(cors({
-    origin: env.FRONTED_URL,
+    origin: env.FRONTEND_URL,
     credentials: true,
 }))
 
