@@ -1,6 +1,6 @@
 // src/pages/ViewTrip/index.jsx
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/auth";
 
 import TripOverview from "@/components/my-trips/TripOverview.jsx";
@@ -18,19 +18,16 @@ import RawJson from "./RawJson.jsx";
  * Entry: ViewTrip page (small & readable)
  */
 export default function ViewTrip() {
-  const location = useLocation();
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  // Hook handles loading from location.state / sessionStorage and enhancing images
-  const { plan, normalizedPlan, loading } = usePlanLoader({ location });
+  // The hook now handles its own data loading from sessionStorage
+  const { plan, normalizedPlan, loading } = usePlanLoader();
 
   // Save logic extracted
-  const { saving, saveTrip } = useSaveTrip({ user, plan: normalizedPlan , navigate });
+  const { saving, saveTrip } = useSaveTrip({ user, plan: normalizedPlan, navigate });
 
   const [tab, setTab] = useState("overview");
-
-  console.log("normalizedPlan in ViewTrip:", JSON.stringify(normalizedPlan, null, 2));
 
   if (loading) return <p className="p-4">Loading trip preview...</p>;
   if (!normalizedPlan) return <p className="p-4 text-red-500">No trip plan to display. Please generate a trip first.</p>;

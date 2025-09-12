@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { getPlaceImage, getHotelImage } from "@/services/GlobalApi";
+import { getHotelImage } from "@/services/GlobalApi";
 
-export default function usePlanLoader({ location }) {
-    const [plan, setPlan] = useState(() => location?.state?.plan || null);
-    const [loading, setLoading] = useState(!plan);
+// No longer receives `location` prop
+export default function usePlanLoader() {
+    // Initialize plan to null. It will be populated from sessionStorage.
+    const [plan, setPlan] = useState(null);
+    const [loading, setLoading] = useState(true); // Start loading, as we need to read from storage.
     const enhancementRan = useRef(false);
     const isMounted = useRef(true);
 
@@ -11,21 +13,23 @@ export default function usePlanLoader({ location }) {
         return () => { isMounted.current = false; };
     }, []);
 
+    // Effect to load the plan from sessionStorage on initial mount
     useEffect(() => {
-        if (plan) {
-            setLoading(false);
-            return;
-        }
-
         try {
             const stored = sessionStorage.getItem("latest_trip_plan");
-            if (stored) setPlan(JSON.parse(stored));
+            if (stored) {
+                const parsedPlan = JSON.parse(stored);
+                if (isMounted.current) {
+                    setPlan(parsedPlan);
+                }
+            } else {
+                 if (isMounted.current) setLoading(false); // No plan found, stop loading
+            }
         } catch (err) {
             console.warn("Failed reading latest_trip_plan from session storage", err);
-        } finally {
-            setLoading(false);
+            if (isMounted.current) setLoading(false);
         }
-    }, []);
+    }, []); // Empty dependency array ensures this runs only once
 
     const normalizedPlan = useMemo(() => {
         if (!plan) return null;
@@ -43,6 +47,7 @@ export default function usePlanLoader({ location }) {
         return p;
     }, [plan]);
 
+    // Effect to enhance hotel images once the normalizedPlan is ready
     useEffect(() => {
         if (!normalizedPlan || enhancementRan.current) return;
         enhancementRan.current = true;
@@ -51,17 +56,17 @@ export default function usePlanLoader({ location }) {
 
         const enhanceHotelImages = async () => {
             console.log("Initial plan before enhancement:", JSON.stringify(normalizedPlan, null, 2));
-            setLoading(true);
+            setLoading(true); // Start loading for image enhancement
             try {
                 const hotelsToEnhance = JSON.parse(JSON.stringify(normalizedPlan.hotelOptions));
 
                 const enhancedHotels = await Promise.all(
                     hotelsToEnhance.map(async (hotel) => {
+                        if (hotel.hotelImageUrl) return hotel; // Skip if image already exists
                         try {
                             const hotelInfo = { name: hotel.hotelName, address: hotel.hotelAddress };
                             const url = await getHotelImage(hotelInfo);
-                            const enhancedHotel = { ...hotel, hotelImageUrl: url || "" };
-                            return enhancedHotel;
+                            return { ...hotel, hotelImageUrl: url || "" };
                         } catch (err) {
                             console.warn(`Error fetching image for hotel: ${hotel.hotelName}`, err);
                             return { ...hotel, hotelImageUrl: "" };
@@ -69,14 +74,10 @@ export default function usePlanLoader({ location }) {
                     })
                 );
 
-                if (cancelled) return;
+                if (cancelled || !isMounted.current) return;
 
                 setPlan(prevPlan => {
-                    const newPlan = {
-                        ...prevPlan,
-                        hotelOptions: enhancedHotels,
-                        dailyItinerary: prevPlan.dailyItinerary
-                    };
+                    const newPlan = { ...prevPlan, hotelOptions: enhancedHotels };
                     console.log("Final plan after enhancement:", JSON.stringify(newPlan, null, 2));
                     return newPlan;
                 });
@@ -85,7 +86,7 @@ export default function usePlanLoader({ location }) {
                 console.warn("Failed enhancing hotel data", err);
             } finally {
                 if (!cancelled && isMounted.current) {
-                    setLoading(false);
+                    setLoading(false); // Finish loading after enhancement
                 }
             }
         };

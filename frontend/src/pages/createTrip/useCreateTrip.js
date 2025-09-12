@@ -16,7 +16,6 @@ export const useCreateTrip = () => {
     const [formData, setFormData] = useState(initialFormData);
     const [loading, setLoading] = useState(false);
     const [showAuthModal, setShowAuthModal] = useState(false);
-    // New state to prevent spamming the toast notifications
     const [isDisplayingErrors, setIsDisplayingErrors] = useState(false);
 
     const navigate = useNavigate();
@@ -33,7 +32,6 @@ export const useCreateTrip = () => {
     const closeAuthModal = () => setShowAuthModal(false);
 
     const onGenerateTrip = async () => {
-        // Guard clause: prevent running if already loading or showing errors
         if (loading || isDisplayingErrors) {
             return;
         }
@@ -53,7 +51,6 @@ export const useCreateTrip = () => {
                 }, index * 600); // Staggered display
             });
 
-            // Set a timer to reset the flag after all toasts have been shown
             const totalToastTime = errors.length * 600;
             setTimeout(() => {
                 setIsDisplayingErrors(false);
@@ -79,12 +76,14 @@ export const useCreateTrip = () => {
             }
 
             try {
-                sessionStorage.setItem('plan', JSON.stringify(plan));
-
+                // Use the correct key and rely only on sessionStorage
+                sessionStorage.setItem('latest_trip_plan', JSON.stringify(plan));
             } catch(err){
                 console.warn('Could not save plan to sessionStorage', err)
             }
-            navigate("/create-trip/view-trip", { state: { plan } });
+            
+            // Navigate without passing state
+            navigate("/create-trip/view-trip");
 
         } catch (err) {
             console.error(err);
