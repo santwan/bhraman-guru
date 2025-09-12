@@ -69,6 +69,9 @@ export default function usePlanLoader({ location }) {
 
                 const enhancedItineraryPromise = Promise.all(
                     planToEnhance.dailyItinerary.map(async (day) => {
+                        if (!Array.isArray(day.schedule)) {
+                            return { ...day, schedule: [] };
+                        }
                         const enhancedSchedule = await Promise.all(
                             day.schedule.map(async (place) => {
                                 if (place.placeImageUrl) return place;
@@ -98,7 +101,6 @@ export default function usePlanLoader({ location }) {
                     dailyItinerary: enhancedItinerary,
                 };
 
-                console.log("Final plan object right before setting state:", JSON.stringify(finalEnhancedPlan, null, 2));
                 setPlan(finalEnhancedPlan);
 
             } catch (err) {
