@@ -28,7 +28,7 @@ const GeneratingTrip = () => {
 
         return newPercent;
       });
-    }, 200); // Update every 100ms for a smoother feel
+    }, 400); // Update every 400ms for a smoother feel
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
