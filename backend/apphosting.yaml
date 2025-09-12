@@ -1,0 +1,13 @@
+# Environment variables and secrets that will be passed to the backend
+env:
+  - variable: FRONTEND_URL
+    secret: FRONTEND_URL
+
+  - variable: GOOGLE_API_KEY
+    secret: GOOGLE_API_KEY
+
+  - variable: GEMINI_API_KEY
+    secret: GEMINI_API_KEY
+
+  - variable: GOOGLE_APPLICATION_CREDENTIALS
+    secret: GOOGLE_APPLICATION_CREDENTIALS

@@ -10,15 +10,15 @@ import "dotenv/config"
 
 const need = (k) => {
     const v = process.env[k];
-    if(!v) throw new Error("Missing env: ${k}")
+    if(!v) throw new Error(`Missing env: ${k}`);
     return v;
 }
 
 // Centralized and validated environment variables for the application.
 export const env = {
     NODE_ENV: process.env.NODE_ENV ?? "development",
-    APP_PORT: parseInt(process.env.PORT ?? "5000", 10),
-    FRONTED_URL: need("FRONTEND_URL"),
+    APP_PORT: parseInt(process.env.PORT ?? "8080", 10),
+    FRONTEND_URL: need("FRONTEND_URL"),
     GOOGLE_API_KEY: need("GOOGLE_API_KEY"),
     GEMINI_API_KEY: need("GEMINI_API_KEY"),
     GOOGLE_APPLICATION_CREDENTIALS: need("GOOGLE_APPLICATION_CREDENTIALS")
