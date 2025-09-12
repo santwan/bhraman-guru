@@ -1,0 +1,245 @@
+{
+  "tripDetails": {
+    "destination": "Kolkata, West Bengal, India",
+    "noOfDays": 2,
+    "numberOfTravelers": 4,
+    "budget": "Moderate"
+  },
+  "hotelOptions": [
+    {
+      "hotelName": "The Peerless Inn Kolkata",
+      "hotelAddress": "12, Jawaharlal Nehru Rd, Esplanade, Dharmatala, Taltala, Kolkata, West Bengal 700013",
+      "price": "INR 5000-7000 per night",
+      "hotelImageUrl": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/33052140.jpg",
+      "geoCoordinates": {
+        "latitude": "22.5644",
+        "longitude": "88.3503"
+      },
+      "rating": "4.1/5",
+      "description": "A well-located 4-star hotel in the heart of Kolkata, offering comfortable rooms, dining options, and easy access to major attractions. Known for its warm hospitality.",
+      "bookingLink": "https://www.booking.com/hotel/in/the-peerless-inn-kolkata.en-gb.html"
+    },
+    {
+      "hotelName": "Kenilworth Hotel, Kolkata",
+      "hotelAddress": "1&2, Little Russel St, Kankaria Estates, Park Street Area, Kolkata, West Bengal 700071",
+      "price": "INR 5500-7500 per night",
+      "hotelImageUrl": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/31336109.jpg",
+      "geoCoordinates": {
+        "latitude": "22.5539",
+        "longitude": "88.3516"
+      },
+      "rating": "4.3/5",
+      "description": "An elegant 4-star hotel combining old-world charm with modern amenities. Features multiple restaurants, a bar, and is situated close to Park Street.",
+      "bookingLink": "https://www.booking.com/hotel/in/kenilworth.en-gb.html"
+    },
+    {
+      "hotelName": "Hotel Lindsay",
+      "hotelAddress": "8A, Lindsay St, New Market Area, Dharmatala, Taltala, Kolkata, West Bengal 700087",
+      "price": "INR 3500-5000 per night",
+      "hotelImageUrl": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/200922883.jpg",
+      "geoCoordinates": {
+        "latitude": "22.5604",
+        "longitude": "88.3516"
+      },
+      "rating": "3.8/5",
+      "description": "A budget-friendly yet comfortable hotel located right next to New Market, ideal for shoppers and those looking for central access. Offers basic amenities.",
+      "bookingLink": "https://www.booking.com/hotel/in/lindsay.en-gb.html"
+    },
+    {
+      "hotelName": "Hotel Casa Fortuna",
+      "hotelAddress": "23, Lala Lajpat Rai Sarani, Kankaria Estates, Park Street Area, Kolkata, West Bengal 700020",
+      "price": "INR 4000-6000 per night",
+      "hotelImageUrl": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/19326315.jpg",
+      "geoCoordinates": {
+        "latitude": "22.5487",
+        "longitude": "88.3515"
+      },
+      "rating": "4.0/5",
+      "description": "A boutique 3-star hotel offering contemporary rooms and a pleasant stay. Located near Park Street, it provides good value for money with modern facilities.",
+      "bookingLink": "https://www.booking.com/hotel/in/casa-fortuna.en-gb.html"
+    },
+    {
+      "hotelName": "Hotel Presidency",
+      "hotelAddress": "124, Prince Anwar Shah Rd, Lake Gardens, Kolkata, West Bengal 700045",
+      "price": "INR 3000-4500 per night",
+      "hotelImageUrl": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/15535560.jpg",
+      "geoCoordinates": {
+        "latitude": "22.5029",
+        "longitude": "88.3619"
+      },
+      "rating": "3.7/5",
+      "description": "A comfortable and affordable hotel offering decent amenities and services. Slightly away from the absolute city center, but well-connected.",
+      "bookingLink": "https://www.com/hotel/in/presidency-kolkata.en-gb.html"
+    },
+    {
+      "hotelName": "FabHotel Urban Green Ballygunge",
+      "hotelAddress": "11/1, Fern Rd, Ballygunge, Kolkata, West Bengal 700019",
+      "price": "INR 2500-4000 per night",
+      "hotelImageUrl": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/338275345.jpg",
+      "geoCoordinates": {
+        "latitude": "22.5204",
+        "longitude": "88.3615"
+      },
+      "rating": "3.9/5",
+      "description": "A clean and modern budget hotel offering essential comforts. Good for travelers looking for an economical yet pleasant stay in a residential area.",
+      "bookingLink": "https://www.booking.com/hotel/in/fabhotel-urban-green-ballygunge-kolkata.en-gb.html"
+    },
+    {
+      "hotelName": "Treebo Trend Hotel Eden",
+      "hotelAddress": "56, Jawaharlal Nehru Rd, Esplanade, Dharmatala, Taltala, Kolkata, West Bengal 700071",
+      "price": "INR 3000-4500 per night",
+      "hotelImageUrl": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/228105021.jpg",
+      "geoCoordinates": {
+        "latitude": "22.5606",
+        "longitude": "88.3512"
+      },
+      "rating": "3.8/5",
+      "description": "A contemporary budget hotel located centrally, offering comfortable stays with modern amenities. Close to major attractions and shopping areas.",
+      "bookingLink": "https://www.booking.com/hotel/in/treebo-trend-eden-kolkata.en-gb.html"
+    }
+  ],
+  "dailyItinerary": [
+    {
+      "day": 1,
+      "bestTimeToVisit": "Morning to Evening (9:00 AM - 7:00 PM)",
+      "schedule": [
+        {
+          "placeName": "Victoria Memorial",
+          "placeDetails": "An iconic large marble building built between 1906 and 1921, dedicated to the memory of Queen Victoria. It houses a museum and is surrounded by vast, lush gardens.",
+          "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Victoria_Memorial_at_Night.jpg",
+          "geoCoordinates": {
+            "latitude": "22.5447",
+            "longitude": "88.3425"
+          },
+          "ticketPricing": "Indians: INR 30, Foreigners: INR 500 (Museum); Gardens: INR 20",
+          "rating": "4.6/5",
+          "estimatedTimeSpent": "2-3 hours",
+          "travelTimeFromPrevious": "N/A (Starting Point)"
+        },
+        {
+          "placeName": "St. Paul's Cathedral",
+          "placeDetails": "An Anglican cathedral noted for its Gothic Revival architecture. It is the first Episcopal Church of Asia and is known for its stained glass windows and frescoes.",
+          "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b2/St_Paul%27s_Cathedral%2C_Kolkata.jpg",
+          "geoCoordinates": {
+            "latitude": "22.5430",
+            "longitude": "88.3452"
+          },
+          "ticketPricing": "Free Entry",
+          "rating": "4.5/5",
+          "estimatedTimeSpent": "1 hour",
+          "travelTimeFromPrevious": "10 minutes walk"
+        },
+        {
+          "placeName": "Indian Museum",
+          "placeDetails": "The largest and oldest museum in India, established in 1814. It has rare collections of antiques, armour and ornaments, fossils, skeletons, mummies, and Mughal paintings.",
+          "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Indian_Museum_Kolkata_Entrance.jpg",
+          "geoCoordinates": {
+            "latitude": "22.5606",
+            "longitude": "88.3512"
+          },
+          "ticketPricing": "Indians: INR 50, Foreigners: INR 500",
+          "rating": "4.3/5",
+          "estimatedTimeSpent": "2-3 hours",
+          "travelTimeFromPrevious": "15-20 minutes by taxi/cab (including lunch break)"
+        },
+        {
+          "placeName": "New Market (Hogg Market)",
+          "placeDetails": "A historic market complex dating back to 1874, offering a wide array of goods from clothing, jewelry, and electronics to food items and flowers. Great for local shopping and experiencing the city's pulse.",
+          "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e4/New_Market_Entrance%2C_Kolkata.jpg",
+          "geoCoordinates": {
+            "latitude": "22.5615",
+            "longitude": "88.3516"
+          },
+          "ticketPricing": "N/A (Shopping - Varies)",
+          "rating": "4.0/5",
+          "estimatedTimeSpent": "1-2 hours",
+          "travelTimeFromPrevious": "5 minutes walk from Indian Museum"
+        },
+        {
+          "placeName": "Park Street",
+          "placeDetails": "Known as 'Food Street' and 'The Street that Never Sleeps', Park Street is famous for its restaurants, cafes, pubs, and vibrant nightlife. Perfect for an evening stroll and dinner.",
+          "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Park_Street_Kolkata_at_night.jpg/1280px-Park_Street_Kolkata_at_night.jpg",
+          "geoCoordinates": {
+            "latitude": "22.5539",
+            "longitude": "88.3519"
+          },
+          "ticketPricing": "N/A (Varies)",
+          "rating": "4.4/5",
+          "estimatedTimeSpent": "1-2 hours (for strolling/dinner)",
+          "travelTimeFromPrevious": "10 minutes walk/short taxi from New Market"
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "bestTimeToVisit": "Morning to Evening (8:00 AM - 7:00 PM)",
+      "schedule": [
+        {
+          "placeName": "Howrah Bridge",
+          "placeDetails": "A cantilever bridge over the Hooghly River, connecting the twin cities of Howrah and Kolkata. It's an iconic symbol of Kolkata, known for its sheer scale and constant activity.",
+          "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Howrah_Bridge_at_night.jpg/1280px-Howrah_Bridge_at_night.jpg",
+          "geoCoordinates": {
+            "latitude": "22.5855",
+            "longitude": "88.3467"
+          },
+          "ticketPricing": "Free (to walk/drive across)",
+          "rating": "4.6/5",
+          "estimatedTimeSpent": "30 minutes - 1 hour",
+          "travelTimeFromPrevious": "N/A (Morning Start)"
+        },
+        {
+          "placeName": "Mullik Ghat Flower Market",
+          "placeDetails": "One of Asia's largest and oldest flower markets, located just below the Howrah Bridge. A chaotic yet vibrant spectacle of colours and scents, especially lively in the early morning.",
+          "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Mullik_Ghat_Flower_Market%2C_Kolkata.jpg/1024px-Mullik_Ghat_Flower_Market%2C_Kolkata.jpg",
+          "geoCoordinates": {
+            "latitude": "22.5804",
+            "longitude": "88.3473"
+          },
+          "ticketPricing": "Free",
+          "rating": "4.4/5",
+          "estimatedTimeSpent": "1 hour",
+          "travelTimeFromPrevious": "5-10 minutes walk from Howrah Bridge viewpoint"
+        },
+        {
+          "placeName": "Dakshineswar Kali Temple",
+          "placeDetails": "A famous Hindu temple complex dedicated to the goddess Kali, situated on the eastern bank of the Hooghly River. It was built by Rani Rashmoni and is closely associated with Ramakrishna Paramahamsa.",
+          "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Dakshineswar_Kali_Temple_at_dusk.jpg/1280px-Dakshineswar_Kali_Temple_at_dusk.jpg",
+          "geoCoordinates": {
+            "latitude": "22.6548",
+            "longitude": "88.3575"
+          },
+          "ticketPricing": "Free Entry (Donations accepted)",
+          "rating": "4.7/5",
+          "estimatedTimeSpent": "1.5-2 hours",
+          "travelTimeFromPrevious": "45-60 minutes by taxi/cab (including lunch break consideration)"
+        },
+        {
+          "placeName": "Belur Math",
+          "placeDetails": "The headquarters of the Ramakrishna Math and Mission, located on the west bank of the Hooghly River. It's a serene campus known for its architectural fusion of Hindu, Christian, and Islamic styles, symbolizing the unity of all religions.",
+          "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Belur_Math_Main_Temple.jpg/1280px-Belur_Math_Main_Temple.jpg",
+          "geoCoordinates": {
+            "latitude": "22.6288",
+            "longitude": "88.3562"
+          },
+          "ticketPricing": "Free Entry",
+          "rating": "4.7/5",
+          "estimatedTimeSpent": "1.5-2 hours",
+          "travelTimeFromPrevious": "15-20 minutes by ferry/taxi from Dakshineswar Kali Temple"
+        },
+        {
+          "placeName": "Princep Ghat",
+          "placeDetails": "A historic ghat built in 1841 during the British Raj, located on the banks of the Hooghly River. It offers picturesque views of the Vidyasagar Setu (Second Hooghly Bridge) and is popular for evening strolls, boat rides, and watching sunsets.",
+          "placeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Prinsep_Ghat_with_Vidyasagar_Setu_in_the_background.jpg/1280px-Prinsep_Ghat_with_Vidyasagar_Setu_in_the_background.jpg",
+          "geoCoordinates": {
+            "latitude": "22.5539",
+            "longitude": "88.3364"
+          },
+          "ticketPricing": "Free (Boat rides available for a fee)",
+          "rating": "4.5/5",
+          "estimatedTimeSpent": "1-1.5 hours",
+          "travelTimeFromPrevious": "30-45 minutes by taxi/cab from Belur Math"
+        }
+      ]
+    }
+  ]
+}

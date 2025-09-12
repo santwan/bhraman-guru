@@ -8,7 +8,7 @@ import Profile from '@/pages/Profile.jsx';
 import Auth from '@/components/auth/Auth.jsx';
 import { useAuthModal } from '@/context/authModal';
 import ProtectedRoute from '@/routes/ProtectedRoute.jsx';
-import ViewTrip from '@/pages/ViewTrip.jsx';
+import ViewTrip from '@/pages/viewTrip/ViewTrip.jsx';
 
 const routes = [
   {

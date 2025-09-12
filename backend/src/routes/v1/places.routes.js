@@ -1,10 +1,12 @@
 import { Router } from "express";
-import * as ctrl from "../../controllers/places.controller.js";
+import { getPlaceImage, getHotelImage } from "../../controllers/places.controller.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 
 const router = Router();
 
-// GET /api/v1/places/details?placeName=...
-router.get("/details", asyncHandler(ctrl.getPlaceImage));
+// POST /api/v1/places/details
+router.post("/places/place-details", asyncHandler(getPlaceImage));
+
+router.post("/places/hotel-details", asyncHandler(getHotelImage));
 
 export default router;
