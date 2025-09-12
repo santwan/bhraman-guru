@@ -19,17 +19,34 @@ import admin from 'firebase-admin';
 // like API keys or credential paths directly into the source code.
 import { env } from './env.js';
 
+
 /**
- * Retrieve the service account credentials.
- * The value of `env.GOOGLE_APPLICATION_CREDENTIALS` is typically the JSON object
- * of your service account key. A service account is a special type of non-human
- * Google account that represents your server application. It has its own unique
- * credentials and permissions, allowing it to authenticate and access Google Cloud
- * and Firebase APIs on your behalf. Loading it from environment variables is the
- * recommended approach for security and portability across different deployment
- * environments (development, staging, production).
+ * The service account credential string from the environment variables.
+ * @type {string | undefined}
  */
-const serviceAccount = env.GOOGLE_APPLICATION_CREDENTIALS;
+const serviceAccountString = env.GOOGLE_APPLICATION_CREDENTIALS;
+
+// Validate that the credential string is present.
+if (!serviceAccountString) {
+  console.error('Firebase initialization failed: GOOGLE_APPLICATION_CREDENTIALS environment variable is not set.');
+  // In a real-world scenario, you might want to exit the process or handle this more gracefully.
+  process.exit(1);
+}
+
+/**
+ * The parsed service account JSON object.
+ * @type {object}
+ */
+let serviceAccount;
+try {
+  // The environment variable contains the JSON as a string. We must parse it into an object.
+  serviceAccount = JSON.parse(serviceAccountString);
+} catch (error) {
+  console.error('Firebase initialization failed: Could not parse GOOGLE_APPLICATION_CREDENTIALS. Ensure it is a valid JSON string.');
+  console.error(error);
+  process.exit(1);
+}
+
 
 /**
  * Initialize the Firebase application instance.
