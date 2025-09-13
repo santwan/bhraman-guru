@@ -4,15 +4,18 @@ import { Compass } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAnimation } from "../hooks/useAnimation";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import BgCircle from "./BgCircle";
 
 const HeroSection = () => {
-  const titleAnimation = useAnimation("fadeInTop", 0, 0.8);
-  const subtextAnimation = useAnimation("fadeInBottom", 0.3, 0.8);
-  const buttonAnimation = useAnimation("zoomIn", 0.5, 0.5);
+  const headerAnimation = useAnimation("ZoomIn", 0.5, 3);
+  const titleAnimation = useAnimation("ZoomIn", 0.6, 1);
+  const subtextAnimation = useAnimation("ZoomIn", 0.7, 1.5);
+  const buttonAnimation = useAnimation("zoomIn", 0.9, 2.3);
 
   return (
-    <div className="relative z-10 min-h-[110vh] flex flex-col items-center justify-center overflow-hidden ">
-      
+    <div className="relative z-10 min-h-screen flex flex-col items-center justify-center overflow-hidden ">
+
+
       {/* <div className="absolute  top-0  z-0 pointer-events-none">
         <DotLottieReact 
           src="/clouds loop.lottie"
@@ -21,16 +24,54 @@ const HeroSection = () => {
           className="md:w-lg"
         />
       </div> */}
-      <div className="relative z-5 text-center space-y-5">
+      <div className="relative z-5 text-center  space-y-5">
+
+          <BgCircle
+            position="left-3"
+            size="w-60 h-60"
+            from="from-red-500/40"
+            to="to-red-500/50"
+            hiddenOn="sm"
+          
+          />
+
+          <BgCircle
+            position="top-30 right-16"
+            size="w-60 h-60"
+            from="from-indigo-500/40"
+            via="via-emerald-500/40"
+            to="to-green-500/50"
+            hiddenOn="sm"
+            
+          />
         {/* Big Slogan Header */}
+
+        <motion.h1
+          {...headerAnimation}
+        >
+          <span className="tracking-wide text-4xl font-semibold sm:text-5xl md:text-6xl font-serif">
+              <span className="text-blue-500">B</span>
+                <span className="text-blue-500">h</span>
+                <span className="text-cyan-500">r</span>
+                <span className="text-cyan-500">a</span>
+                <span className="text-cyan-500">m</span>
+                <span className="text-teal-500">a</span>
+                <span className="text-teal-500">n</span>
+                <span className="text-red-500">G</span>
+                <span className="text-red-500">u</span>
+                <span className="text-orange-500">r</span>
+                <span className="text-orange-500">u</span>
+                <span className="text-orange-500"></span>
+          </span>
+        </motion.h1>
+
         <motion.h1
           {...titleAnimation}
-          className="text-4xl sm:text-5xl md:text-5xl font-bold tracking-tight"
+          className="text-4xl sm:text-5xl md:text-5xl font-semibold tracking-wide"
         >
           <div className="md:px-25 leading-snug">
             <p>
-              <span className="underline">BhramanGuru</span>: Your Expert AI Travel
-              Planner
+              Your Expert AI Travel Planner
               <br /> <span>and Journey Curator</span>
             </p>
           </div>
@@ -39,7 +80,7 @@ const HeroSection = () => {
         {/* Subtext */}
         <motion.p
           {...subtextAnimation}
-          className="max-w-2xl mx-auto text-lg sm:text-xl"
+          className="max-w-2xl mx-auto text-lg sm:text-xl  text-gray-600 dark:text-gray-300"
         >
           Stop searching, start experiencing. Unlock smart, personalized
           itineraries and discover secret local spots for truly unforgettable and
@@ -63,7 +104,7 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      <div className="flex items-center justify-center">
+      {/* <div className="flex items-center justify-center">
         <DotLottieReact
             src="/Travel App - Onboarding Animation.lottie"
             loop
@@ -71,7 +112,7 @@ const HeroSection = () => {
             className="w-full max-w-md md:max-w-2xl lg:max-w-4xl h-auto pointer-events-none"
             aria-hidden="true"
         />
-      </div>
+      </div> */}
     </div>
   );
 };

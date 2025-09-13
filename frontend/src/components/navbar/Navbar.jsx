@@ -63,7 +63,7 @@ export default function Navbar() {
       </AnimatePresence>
 
       {/* Spacer to prevent content from being hidden behind the fixed navbar */}
-      <div className="h-28" />
+      {/* <div className="h-28" /> */}
 
       <FloatingNavbar scrolled={scrolled} navConfig={navConfig} />
     </>
