@@ -11,7 +11,7 @@ export default function Logo({ hidden }) {
         <img
           src="/BhramanGuru.svg"
           alt="BhramanGuru Logo"
-          className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto min-h-[40px] max-h-[64px]"
+          className="h-10 sm:h-12 md:h-12 lg:h-12 w-auto min-h-[40px] max-h-[64px]"
         />
       </Link>
     </div>

@@ -7,13 +7,15 @@ import AuthSection from "@/components/navbar/AuthSection.jsx";
 import MobileMenu from "@/components/navbar/MobileMenu.jsx";
 import FloatingNavbar from "@/components/navbar/FloatingNavbar.jsx";
 import { navConfig } from "@/utils/navConfig.js";
+import { useAnimation } from "../../hooks/useAnimation";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navAnimation = useAnimation("fadeInBottom");
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 600);
+    const handleScroll = () => setScrolled(window.scrollY > 1000);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -23,12 +25,10 @@ export default function Navbar() {
       <AnimatePresence>
         {!scrolled && (
           <motion.nav
-            initial={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed top-5 left-1/2 -translate-x-1/2 z-40 p-4 w-[95%] max-w-7xl mx-auto
+            {...navAnimation}
+            className="fixed top-5 left-1/2 -translate-x-1/2 z-40 p-2 w-[95%] max-w-7xl mx-auto
                        bg-black/10 backdrop-blur-md 
-                       rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+                       rounded-full border border-black/25 dark:border-white/10 shadow-[0_0_50px_rgba(200,155,55,0.1)]"
           >
             <div className="flex justify-between items-center">
               <Logo />
