@@ -7,7 +7,7 @@ import Footer from "@/components/Footer.jsx";
 
 const Home = () => {
     return(
-        <div className=" pt-27">
+        <div className="pt-4">
             <HeroSection/>
             <TestimonialSection/>
             <BenefitSection/>
