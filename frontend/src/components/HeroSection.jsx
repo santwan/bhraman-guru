@@ -11,9 +11,17 @@ const HeroSection = () => {
   const buttonAnimation = useAnimation("zoomIn", 0.5, 0.5);
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center ">
+    <div className="relative z-10 min-h-[110vh] flex flex-col items-center justify-center overflow-hidden ">
       
-      <div className="text-center space-y-5">
+      {/* <div className="absolute  top-0  z-0 pointer-events-none">
+        <DotLottieReact 
+          src="/clouds loop.lottie"
+          loop
+          autoplay
+          className="md:w-lg"
+        />
+      </div> */}
+      <div className="relative z-5 text-center space-y-5">
         {/* Big Slogan Header */}
         <motion.h1
           {...titleAnimation}
