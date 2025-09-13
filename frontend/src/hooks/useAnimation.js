@@ -3,7 +3,7 @@
  * Provides a set of predefined animations and allows for customization.
  *
  * @param {string} [type='fadeInBottom'] - The type of animation.
- *   Available types: 'fadeInBottom', 'fadeIn', 'slideInLeft', 'slideInRight', 'zoomIn', 'stagger'.
+ *   Available types: 'fadeInBottom', 'fadeInTop', 'fadeIn', 'slideInLeft', 'slideInRight', 'zoomIn', 'stagger'.
  * @param {number} [delay=0] - The delay before the animation starts (in seconds).
  * @param {number} [duration=0.5] - The duration of the animation (in seconds).
  * @returns {object} Animation props to be spread onto a framer-motion component.
@@ -12,6 +12,10 @@ export const useAnimation = (type = 'fadeInBottom', delay = 0, duration = 0.5) =
   const variants = {
     fadeInBottom: {
       initial: { opacity: 0, y: 20 },
+      animate: { opacity: 1, y: 0 },
+    },
+    fadeInTop: {
+      initial: { opacity: 0, y: -20 },
       animate: { opacity: 1, y: 0 },
     },
     fadeIn: {

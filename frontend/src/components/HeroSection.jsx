@@ -3,21 +3,25 @@ import { motion } from "framer-motion";
 import { Compass } from "lucide-react";
 import ReactPlayer from "react-player/youtube";
 import { Link } from "react-router-dom";
+import { useAnimation } from "../hooks/useAnimation";
 
 const HeroSection = () => {
+  const titleAnimation = useAnimation("fadeInTop", 0, 0.8);
+  const subtextAnimation = useAnimation("fadeInBottom", 0.3, 0.8);
+  const buttonAnimation = useAnimation("zoomIn", 0.5, 0.5);
+  const videoAnimation = useAnimation("fadeInBottom", 0.6, 0.8);
+
   return (
     <div className="bg-white dark:bg-[#0d0d0d] text-[#3a2601] dark:text-white py-20 px-6 text-center space-y-10 transition-colors duration-300">
-      
       {/* Big Slogan Header */}
       <motion.h1
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        {...titleAnimation}
         className="text-4xl sm:text-5xl md:text-5xl font-bold tracking-tight"
       >
         <div className="md:px-25 leading-snug">
           <p>
-            <span className="underline">BhramanGuru</span>: Your Expert AI Travel Planner
+            <span className="underline">BhramanGuru</span>: Your Expert AI Travel
+            Planner
             <br /> <span>and Journey Curator</span>
           </p>
         </div>
@@ -25,21 +29,16 @@ const HeroSection = () => {
 
       {/* Subtext */}
       <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
+        {...subtextAnimation}
         className="max-w-2xl mx-auto text-lg sm:text-xl text-[#3a2601]/85 dark:text-white/80"
       >
-        Stop searching, start experiencing. Unlock smart, personalized itineraries and discover secret local spots for truly unforgettable and hassle-free adventures.
+        Stop searching, start experiencing. Unlock smart, personalized
+        itineraries and discover secret local spots for truly unforgettable and
+        hassle-free adventures.
       </motion.p>
 
       {/* Plan Trip Button */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex justify-center"
-      >
+      <motion.div {...buttonAnimation} className="flex justify-center">
         <Link
           to={"/create-trip"}
           className="gap-1 inline-flex items-center px-12 py-4 text-lg font-bold rounded-xl 
@@ -54,9 +53,7 @@ const HeroSection = () => {
 
       {/* YouTube Embed */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.8 }}
+        {...videoAnimation}
         className="max-w-4xl mx-auto rounded-xl overflow-hidden mt-10 shadow-xl"
       >
         <div className="aspect-video w-full rounded-xl overflow-hidden shadow-lg">
