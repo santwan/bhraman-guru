@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Compass } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useAnimation } from "../hooks/useAnimation";
+import { useAnimation } from "@/hooks/useAnimation.js";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import BgCircle from "./BgCircle";
 
