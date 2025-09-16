@@ -33,7 +33,7 @@ const CreateTrip = () => {
 
     return (
         <motion.div
-          className="sm:px-10 md:px-32 lg:px-56 xl:px-60 px-5 pb-25 pt-30 mt-10"
+          className="sm:px-10 md:px-32 lg:px-56 xl:px-60 px-5 pb-25 pt-30 lg:pt-35 "
           {...pageAnimation}
         >
           <PageHeader />
