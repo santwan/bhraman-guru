@@ -6,10 +6,14 @@ const GeneratingTrip = () => {
   const [message, setMessage] = useState("Hold on, we're crafting your journey...");
 
   const messages = [
-    { percent: 0, text: "Hold on, we're crafting your journey..." },
-    { percent: 25, text: "Scanning for the best time to visit..." },
-    { percent: 50, text: "Finding the perfect hotels for you..." },
-    { percent: 75, text: "Curating a list of must-see attractions..." },
+    { percent: 5, text: "Analyzing your travel preferences..." },
+    { percent: 15, text: "Charting the optimal travel dates... 🗓️" },
+    { percent: 30, text: "Scouting for top-rated accommodations... 🏨" },
+    { percent: 45, text: "Curating unique local experiences... 🗺️" },
+    { percent: 60, text: "Mapping out your daily itinerary... 📍" },
+    { percent: 75, text: "Adding insider tips and recommendations..." },
+    { percent: 90, text: "Finalizing the details of your trip... ✍️" },
+    { percent: 99, text: "Almost ready ! 🚀" },
   ];
 
   useEffect(() => {
@@ -28,7 +32,7 @@ const GeneratingTrip = () => {
 
         return newPercent;
       });
-    }, 400); // Update every 400ms for a smoother feel
+    }, 600); // Update every 400ms for a smoother feel
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
