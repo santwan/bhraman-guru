@@ -2,12 +2,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/auth";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 
 import TripOverview from "@/components/my-trips/TripOverview.jsx";
 import HotelGrid from "@/components/my-trips/HotelGrid.jsx";
 import DailyItinerary from "@/components/my-trips/DailyItinerary.jsx";
 
-import usePlanLoader from "./usePlanLoader.js";
+import usePlanLoader from "@/hooks/usePlanLoader.js";
 import useSaveTrip from "./useSaveTrip.js";
 
 import TabButton from "./TabButton.jsx";
@@ -24,6 +26,7 @@ export default function ViewTrip() {
   // The hook now handles its own data loading from sessionStorage
   // `plan` will be the original object parsed from sessionStorage and mutated in-place by the hook.
   const { plan, normalizedPlan, loading } = usePlanLoader();
+  
 
   // Save logic extracted
   // Use the raw `plan` (not only normalizedPlan) to ensure the saved object includes in-place mutations
@@ -32,7 +35,17 @@ export default function ViewTrip() {
 
   const [tab, setTab] = useState("overview");
 
-  if (loading) return <p className="p-4">Loading trip preview...</p>;
+  if (loading) return (
+    <div className="flex min-h-screen flex-col items-center justify-center h-full w-full">
+      <div>
+        <DotLottieReact 
+          src="/Loading Travel Animation.lottie"
+          loop
+          autoplay
+        />
+      </div>
+    </div>
+  )
   if (!normalizedPlan) return <p className="p-4 text-red-500">No trip plan to display. Please generate a trip first.</p>;
 
   // defensive destructure with defaults
