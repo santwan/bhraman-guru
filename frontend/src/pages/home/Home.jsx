@@ -8,7 +8,7 @@ import Promotion from "@/components/home/Promotion.jsx";
 
 const Home = () => {
     return(
-        <div className="pt-4">
+        <div className=" pt-10 sm:pt-4">
             <HeroSection/>
             {/* <TestimonialSection/> */}
             <Promotion/>

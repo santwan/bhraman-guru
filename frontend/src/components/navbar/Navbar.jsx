@@ -28,9 +28,9 @@ export default function Navbar() {
             {...navAnimation}
             className="fixed top-5 left-1/2 -translate-x-1/2 z-40 p-2 w-[95%] max-w-7xl mx-auto
                        bg-black/10 backdrop-blur-md 
-                       rounded-full border border-black/25 dark:border-white/10 shadow-[0_0_50px_rgba(200,155,55,0.1)]"
+                       rounded-2xl sm:rounded-full border border-black/25 dark:border-white/10 shadow-[0_0_50px_rgba(200,155,55,0.1)]"
           >
-            <div className="flex justify-between items-center">
+            <div className="flex p-2 sm:p-0 justify-between items-center">
               <Logo />
 
               <div className="hidden lg:flex items-center space-x-8">
