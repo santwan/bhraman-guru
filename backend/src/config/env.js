@@ -17,7 +17,7 @@ const need = (k) => {
 // Centralized and validated environment variables for the application.
 export const env = {
     NODE_ENV: process.env.NODE_ENV ?? "development",
-    PORT: parseInt(process.env.PORT ?? "5000", 10),
+    PORT: parseInt(process.env.PORT ?? "8080", 10),
     FRONTEND_URL: need("FRONTEND_URL"),
     GOOGLE_API_KEY: need("GOOGLE_API_KEY"),
     GEMINI_API_KEY: need("GEMINI_API_KEY"),
