@@ -39,8 +39,10 @@ if (!serviceAccountString) {
  */
 let serviceAccount;
 try {
+  console.log('GOOGLE_APPLICATION_CREDENTIALS (first 200 chars):', (process.env.GOOGLE_APPLICATION_CREDENTIALS || '').slice(0,200));
+
   // The environment variable contains the JSON as a string. We must parse it into an object.
-  serviceAccount = JSON.parse(serviceAccountString);
+  serviceAccount = serviceAccountString;
 } catch (error) {
   console.error('Firebase initialization failed: Could not parse GOOGLE_APPLICATION_CREDENTIALS. Ensure it is a valid JSON string.');
   console.error(error);
