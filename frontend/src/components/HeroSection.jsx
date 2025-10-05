@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 import { Compass } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAnimation } from "@/hooks/useAnimation.js";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import BgCircle from "./BgCircle";
+import { AuroraText } from "./ui/aurora-text";
+import BgCircle from "./global/BgCircle";
 
 const HeroSection = () => {
-  const headerAnimation = useAnimation("ZoomIn", 0.5, 3);
-  const titleAnimation = useAnimation("ZoomIn", 0.6, 1);
-  const subtextAnimation = useAnimation("ZoomIn", 0.7, 1.5);
-  const buttonAnimation = useAnimation("zoomIn", 0.9, 2.3);
+  const headerAnimation = useAnimation("ZoomIn", 0.3, 1);
+  const titleAnimation = useAnimation("ZoomIn", 0.4, 1);
+  const subtextAnimation = useAnimation("ZoomIn", 0.5, 1);
+  const buttonAnimation = useAnimation("zoomIn", 0.6, 1);
 
   return (
     <div className="relative z-10 min-h-screen flex flex-col items-center justify-center overflow-hidden ">
@@ -49,7 +49,7 @@ const HeroSection = () => {
         <motion.h1
           {...headerAnimation}
         >
-          <span className="tracking-wide text-4xl font-semibold sm:text-5xl md:text-6xl font-serif">
+          <span className="tracking-wide text-[46px] font-semibold sm:text-7xl md:text-8xl font-merriweather">
               <span className="text-blue-500">B</span>
                 <span className="text-blue-500">h</span>
                 <span className="text-cyan-500">r</span>
@@ -67,12 +67,12 @@ const HeroSection = () => {
 
         <motion.h1
           {...titleAnimation}
-          className="text-4xl sm:text-5xl md:text-5xl font-semibold tracking-wide"
+          className="text-3xl px-8 sm:text-5xl md:text-5xl font-roboto md:tracking-wide"
         >
-          <div className="md:px-25 leading-snug">
+          <div className="md:px-25 leading-snug dark:text-stone-200">
             <p>
               Your Expert AI Travel Planner
-              <br /> <span>and Journey Curator</span>
+              <br/> <span>and Journey Curator</span>
             </p>
           </div>
         </motion.h1>
@@ -80,7 +80,7 @@ const HeroSection = () => {
         {/* Subtext */}
         <motion.p
           {...subtextAnimation}
-          className="max-w-2xl mx-auto text-lg sm:text-xl  text-gray-600 dark:text-gray-300"
+          className="max-w-2xl mx-auto text-[13px] md:text-[16px] px-12 font-roboto text-gray-600 dark:text-gray-300"
         >
           Stop searching, start experiencing. Unlock smart, personalized
           itineraries and discover secret local spots for truly unforgettable and

@@ -1,3 +1,20 @@
 @import "tailwindcss";
+@import "@fontsource/merriweather";
+@import "@fontsource/roboto-slab";
 
+
+@theme {
+  --font-merriweather: "Merriweather", serif;
+  --font-roboto: "Roboto Slab", serif;
+}
+
+@layer base {
+  html, body {
+    font-family: var(--font-merriweather);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-roboto);
+  }
+}
 @custom-variant dark (&:where(.dark, .dark *));
