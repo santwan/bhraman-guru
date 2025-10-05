@@ -13,7 +13,7 @@ const HeroSection = () => {
   const buttonAnimation = useAnimation("zoomIn", 0.6, 1);
 
   return (
-    <div className="relative z-10 min-h-screen flex flex-col items-center justify-center overflow-hidden ">
+    <div className="relative z-10 h-[80vh] sm:min-h-screen flex flex-col items-center justify-center overflow-hidden ">
 
 
       {/* <div className="absolute  top-0  z-0 pointer-events-none">
@@ -24,7 +24,7 @@ const HeroSection = () => {
           className="md:w-lg"
         />
       </div> */}
-      <div className="relative z-5 text-center  space-y-5">
+      <div className="relative z-5 text-center space-y-3 sm:space-y-5">
 
           <BgCircle
             position="left-3"
@@ -49,7 +49,7 @@ const HeroSection = () => {
         <motion.h1
           {...headerAnimation}
         >
-          <span className="tracking-wide text-[46px] font-semibold sm:text-7xl md:text-8xl font-merriweather">
+          <span className="sm:tracking-wide text-[42px] font-semibold sm:text-7xl md:text-8xl font-merriweather">
               <span className="text-blue-500">B</span>
                 <span className="text-blue-500">h</span>
                 <span className="text-cyan-500">r</span>
@@ -80,7 +80,7 @@ const HeroSection = () => {
         {/* Subtext */}
         <motion.p
           {...subtextAnimation}
-          className="max-w-2xl mx-auto text-[13px] md:text-[16px] px-12 font-roboto text-gray-600 dark:text-gray-300"
+          className="max-w-2xl leading-relaxed sm:leading-normal mx-auto text-[13px] md:text-[16px] px-12 font-roboto text-gray-600 dark:text-gray-300"
         >
           Stop searching, start experiencing. Unlock smart, personalized
           itineraries and discover secret local spots for truly unforgettable and
@@ -91,7 +91,7 @@ const HeroSection = () => {
         <motion.div {...buttonAnimation} className="">
           <Link
             to={"/create-trip"}
-            className="inline-flex items-center gap-1 px-6 md:px-12 py-3 md:py-4 text-base md:text-lg font-bold rounded-xl select-none
+            className="inline-flex items-center gap-1 px-6 mt-3 sm:mt-0 md:px-12 py-3 md:py-4 text-base md:text-lg font-bold rounded-xl select-none
             bg-[#F9C74F] text-[#1A4D8F] hover:bg-[#F6A6A1] hover:text-black
             dark:bg-[#4BA3B4] dark:text-white dark:hover:bg-[#F9C74F] dark:hover:text-black
             shadow-lg hover:shadow-xl active:scale-95 transform-gpu transition duration-300 ease-out
