@@ -1,79 +1,23 @@
 // HowItWorksSection.jsx
 import { useEffect, useRef, useState } from "react";
-
-const STEPS = [
-  {
-    id: 0,
-    title: "Choose Your Destination",
-    desc: "Pick anywhere in the world — from iconic cities to secret hideaways. Start with a destination, dates and travel style.",
-    // Replace with your real image or animated card component
-    content: "🏙️",
-  },
-  {
-    id: 1,
-    title: "Explore Experiences",
-    desc: "Discover culture, food, and activities tailored to your vibe — curated by local insights and AI recommendations.",
-    content: "🏯",
-  },
-  {
-    id: 2,
-    title: "See It on the Map",
-    desc: "Visualize routes, neighbourhoods and nearby attractions so you can plan travel flow and logistics confidently.",
-    content: "🗺️",
-  },
-  {
-    id: 3,
-    title: "AI-Powered Itinerary",
-    desc: "Get a smart, personalized day-by-day plan generated in seconds — optimized for time, budget and preferences.",
-    content: "🤖",
-  },
-  {
-    id: 4,
-    title: "Enjoy the Journey",
-    desc: "Start your trip worry-free with everything organized — recommendations, bookings and travel tips at your fingertips.",
-    content: "✈️",
-  },
-];
+import { STEPS } from "@/constants/home/feature.js";
 
 export default function Promotion() {
-  const [active, setActive] = useState(0);
-  const autoplayRef = useRef(null);
-
-  // Auto-play: cycle every 3.5s
-  useEffect(() => {
-    startAutoplay();
-    return stopAutoplay;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function startAutoplay() {
-    stopAutoplay();
-    autoplayRef.current = setInterval(() => {
-      setActive((s) => (s + 1) % STEPS.length);
-    }, 3500);
-  }
-
-  function stopAutoplay() {
-    if (autoplayRef.current) {
-      clearInterval(autoplayRef.current);
-      autoplayRef.current = null;
-    }
-  }
+  const [active, setActive] = useState(0)
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-16">
+    <section className="max-w-6xl mx-auto px-6 py-16">
+      <div className="text-center pb-8">
+        <h2 className="text-3xl md:text-6xl font-bold">How BhramanGuru Works</h2>
+        <p className=" pt-5 md:text-lg">
+            We combine smart AI with real-world travel insights to make planning effortless and fun. Hover or click a step to see details.
+        </p>
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         {/* LEFT: Dynamic writing + controls */}
         <div
           className="space-y-6"
-          // pause autoplay while user interacts with the left area
-          onMouseEnter={stopAutoplay}
-          onMouseLeave={startAutoplay}
         >
-          <h2 className="text-3xl md:text-4xl font-bold">How BhramanGuru Works</h2>
-          <p className="text-slate-600 max-w-xl">
-            We combine smart AI with real-world travel insights to make planning effortless and fun. Hover or click a step to see details.
-          </p>
 
           <div className="space-y-4">
             {STEPS.map((step, idx) => {
@@ -82,23 +26,47 @@ export default function Promotion() {
                 <button
                   key={step.id}
                   onClick={() => setActive(idx)}
-                  className={`w-full text-left p-4 rounded-lg transition-shadow flex items-start gap-4
-                    ${isActive ? "bg-white/80 shadow-lg ring-2 ring-amber-300" : "bg-white/50 hover:shadow-md"}
-                    dark:bg-slate-800 dark:!bg-opacity-80`}
+                  className={
+                    `w-full text-left p-4 border border-amber-500/70 dark:border-none hover:scale-105 transition-transform rounded-lg transition-shadow flex items-start gap-4
+                    ${
+                      isActive 
+                      ? `bg-white/80 shadow-lg ring-2 ${step.colors.ring} ` 
+                      : "bg-white/50 hover:shadow-md"
+                    }
+                    dark:bg-neutral-900`
+                  }
                   aria-pressed={isActive}
                 >
                   <div
-                    className={`flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center text-xl font-semibold
-                      ${isActive ? "bg-amber-400 text-blue-900" : "bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-200"}`}
+                    className={
+                      `flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center text-xl font-semibold
+                      ${
+                        isActive 
+                        ? `${step.colors.bg}` 
+                        : "bg-slate-100 text-slate-700 dark:bg-slate-950 dark:text-slate-200"}`
+                    }
                   >
                     {step.content}
                   </div>
 
                   <div>
-                    <h3 className={`font-semibold ${isActive ? "text-slate-900" : "text-slate-700 dark:text-slate-200"}`}>
+                    <h3 className={
+                      `font-semibold ${
+                        isActive 
+                        ? `${step.colors.text}`
+                        : "text-slate-700 dark:text-slate-200"
+                      }`
+                      }
+                    >
                       {step.title}
                     </h3>
-                    <p className={`mt-1 text-sm ${isActive ? "text-slate-600" : "text-slate-500 dark:text-slate-400"}`}>
+                    <p className={
+                      `mt-1 text-sm ${
+                        isActive 
+                        ? "text-slate-800 dark:text-slate-200" 
+                        : "text-slate-500 dark:text-slate-400"
+                      }`
+                      }>
                       {step.desc}
                     </p>
                   </div>
@@ -106,45 +74,15 @@ export default function Promotion() {
               );
             })}
           </div>
-
-          {/* small controls */}
-          <div className="flex items-center gap-3 mt-2">
-            <button
-              onClick={() => setActive((a) => (a - 1 + STEPS.length) % STEPS.length)}
-              className="px-3 py-2 rounded-md bg-slate-100 hover:bg-slate-200"
-              aria-label="Previous step"
-            >
-              ←
-            </button>
-            <button
-              onClick={() => setActive((a) => (a + 1) % STEPS.length)}
-              className="px-3 py-2 rounded-md bg-slate-100 hover:bg-slate-200"
-              aria-label="Next step"
-            >
-              →
-            </button>
-            <button
-              onClick={() => (autoplayRef.current ? stopAutoplay() : startAutoplay())}
-              className="ml-auto px-3 py-2 rounded-md border"
-            >
-              {autoplayRef.current ? "Pause" : "Play"}
-            </button>
-          </div>
         </div>
 
         {/* RIGHT: Animated stacked cards */}
         <div
-          className="relative h-80 md:h-96 flex items-center justify-center"
-          onMouseEnter={stopAutoplay}
-          onMouseLeave={startAutoplay}
+          className="relative h-80 md:h-120 flex flex-col items-center justify-center"
         >
-          {/* Background soft glow */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-72 h-72 rounded-full blur-3xl bg-amber-200/30 animate-pulse"></div>
-          </div>
 
           {/* Card stack */}
-          <div className="relative w-72 h-56 md:w-96 md:h-64">
+          <div className="relative w-72 h-56 md:w-96 md:h-full">
             {STEPS.map((step, i) => {
               const offset = i - active; // negative left, zero center, positive right
               // Determine transform classes based on offset
@@ -199,6 +137,23 @@ export default function Promotion() {
                 </div>
               );
             })}
+          </div>
+                    {/* small controls */}
+          <div className="flex items-center gap-10 mt-4">
+            <button
+              onClick={() => setActive((a) => (a - 1 + STEPS.length) % STEPS.length)}
+              className="px-3 py-2 rounded-md text-xl font-extrabold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-indigo-500"
+              aria-label="Previous step"
+            >
+              ←
+            </button>
+            <button
+              onClick={() => setActive((a) => (a + 1) % STEPS.length)}
+              className="px-3 py-2 rounded-md text-xl font-extrabold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-cyan-500"
+              aria-label="Next step"
+            >
+              →
+            </button>
           </div>
         </div>
       </div>
