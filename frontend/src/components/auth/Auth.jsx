@@ -1,24 +1,32 @@
 import React, { useState } from "react";
 import { auth } from "@/firebase/firebaseConfig";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const Auth = ({ setAuthModalOpen }) => {
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
+    if (isRegister && password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
     try {
       if (isRegister) {
-        await auth.createUserWithEmailAndPassword(email, password);
+        await createUserWithEmailAndPassword(auth, email, password);
       } else {
-        await auth.signInWithEmailAndPassword(email, password);
+        await signInWithEmailAndPassword(auth, email, password);
       }
       setAuthModalOpen(false);
     } catch (err) {
+      // You could further map these error messages to be more user-friendly
       setError(err.message);
     }
   };
@@ -52,6 +60,16 @@ const Auth = ({ setAuthModalOpen }) => {
             className="w-full p-3 mb-4 bg-gray-100 dark:bg-gray-800 rounded-lg focus:outline-none"
             required
           />
+          {isRegister && (
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full p-3 mb-4 bg-gray-100 dark:bg-gray-800 rounded-lg focus:outline-none"
+              required
+            />
+          )}
           <button 
             type="submit" 
             className="w-full p-3 bg-[#1A4D8F] text-white rounded-lg font-bold hover:bg-opacity-90"
@@ -63,7 +81,10 @@ const Auth = ({ setAuthModalOpen }) => {
         <p className="text-center mt-4 text-sm text-gray-600 dark:text-gray-400">
           {isRegister ? "Already have an account?" : "Don't have an account?"}
           <button 
-            onClick={() => setIsRegister(!isRegister)} 
+            onClick={() => {
+              setIsRegister(!isRegister);
+              setError(""); // Clear error when toggling
+            }} 
             className="text-[#1A4D8F] dark:text-white font-bold ml-1 focus:outline-none"
           >
             {isRegister ? "Login" : "Create one"}

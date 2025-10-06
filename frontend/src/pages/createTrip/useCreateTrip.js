@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "@/context/auth";
+import { useAuthModal } from "@/context/authModal";
 import { generateTravelPlan } from "@/services/AIModel";
 import { validateTripInputs } from "./validateTripInputs";
 
@@ -15,11 +16,11 @@ const initialFormData = {
 export const useCreateTrip = () => {
     const [formData, setFormData] = useState(initialFormData);
     const [loading, setLoading] = useState(false);
-    const [showAuthModal, setShowAuthModal] = useState(false);
     const [isDisplayingErrors, setIsDisplayingErrors] = useState(false);
 
     const navigate = useNavigate();
     const { currentUser: user } = useAuth();
+    const { setAuthModalOpen } = useAuthModal();
 
     const handleInputChange = (name, value) => {
         setFormData((prevData) => ({
@@ -28,16 +29,13 @@ export const useCreateTrip = () => {
         }));
     };
 
-    const openAuthModal = () => setShowAuthModal(true);
-    const closeAuthModal = () => setShowAuthModal(false);
-
     const onGenerateTrip = async () => {
         if (loading || isDisplayingErrors) {
             return;
         }
 
         if (!user) {
-            openAuthModal();
+            setAuthModalOpen(true)
             return;
         }
 
@@ -97,9 +95,6 @@ export const useCreateTrip = () => {
         formData,
         handleInputChange,
         loading,
-        onGenerateTrip,
-        showAuthModal,
-        openAuthModal,
-        closeAuthModal,
+        onGenerateTrip
     };
 };
