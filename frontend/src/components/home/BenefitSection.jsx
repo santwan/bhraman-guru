@@ -1,5 +1,5 @@
 import React from "react";
-import BenefitCard from "@/components/BenefitCard.jsx";
+import BenefitCard from "@/components/ui/BenefitCard.jsx";
 import {
   MapPin,
   Hotel,

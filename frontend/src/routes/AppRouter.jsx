@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Layout from '@/components/Layout.jsx';
+import Layout from '@/components/global/Layout.jsx';
 import Home from '@/pages/home/Home.jsx';
 import CreateTrip from '@/pages/createTrip/CreateTrip.jsx';
 import MyTrips from '@/pages/MyTrips.jsx';

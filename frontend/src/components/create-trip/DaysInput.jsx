@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from '@/components/Input.jsx';
+import Input from '@/components/ui/Input.jsx';
 import { useAnimation } from '@/hooks/useAnimation';
 import { motion } from 'framer-motion';
 

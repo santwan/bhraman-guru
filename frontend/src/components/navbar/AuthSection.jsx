@@ -1,10 +1,10 @@
 import { useAuth } from "@/context/auth";
 import { useAuthModal } from "@/context/authModal";
-import UserDropdown from "@/components/UserDropdown.jsx";
-import ThemeToggle from "@/components/ThemeToggle.jsx";
+import UserDropdown from "@/components/global/UserDropdown.jsx";
+import ThemeToggle from "@/components/global/ThemeToggle.jsx";
 
 const LoginButton = ({ onClick }) => (
-  <button 
+  <button
     onClick={onClick}
     className="px-4 py-2 rounded-md font-semibold bg-[#1A4D8F] text-white hover:bg-opacity-90"
   >
