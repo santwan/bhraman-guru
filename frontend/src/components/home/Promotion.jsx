@@ -1,5 +1,5 @@
 // HowItWorksSection.jsx
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { STEPS } from "@/constants/home/feature.js";
 
 export default function Promotion() {
