@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+// Import auth instance and helper functions to create/sign-in users
 import { auth } from "@/firebase/firebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
+/**
+ * 
+ * @param {setAuthModalOpen} - function from parent to close the modal after successful auth
+ * @returns 
+ */
 const Auth = ({ setAuthModalOpen }) => {
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState("");
