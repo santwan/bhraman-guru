@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/auth";
+import toast from "react-hot-toast";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 import TripOverview from "@/components/my-trips/TripOverview.jsx";
@@ -8,6 +9,8 @@ import HotelGrid from "@/components/my-trips/HotelGrid.jsx";
 import DailyItinerary from "@/components/my-trips/DailyItinerary.jsx";
 
 import usePlanLoader from "@/hooks/usePlanLoader.js";
+
+import { saveTrip } from "@/services/tripServices.js"
 
 import TabButton from "./TabButton.jsx";
 import HeaderActions from "./HeaderActions.jsx";
@@ -18,7 +21,32 @@ export default function ViewTrip() {
 
   const { plan, loading } = usePlanLoader();
 
+  const { currentUser } = useAuth();
+
   const [tab, setTab] = useState("overview");
+
+  const useSaveTripToDB = async () => {
+    // console.log(currentUser)
+    if(!currentUser.uid){
+      toast.error("No Valid User Session Exists")
+      return;
+    }
+    if(!plan){
+      toast.error("Plan has expired in this Session")
+    }
+    // Creating the Object that will get stored inside the DB
+    const tripPlan = {
+      uid: currentUser.uid,
+      plan: plan
+    }
+    // console.log(tripPlan)
+    try{
+      await saveTrip(tripPlan)
+      toast.success("Trip Plan Saved Successfully")
+    } catch (err){
+      toast.error("Failed to save the trip plan")
+    }
+  }
 
   if (loading) return (
     <div className="flex min-h-screen flex-col items-center justify-center h-full w-full">
