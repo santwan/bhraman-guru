@@ -12,6 +12,7 @@ const HotelCard = ({ hotel, index }) => (
     <img
       src={hotel.hotelImageUrl}
       alt={hotel.hotelName}
+      loading="lazy"
       className="w-full h-40 object-cover"
     />
     <div className="p-4">

@@ -13,6 +13,12 @@ const initialFormData = {
     traveler: ''
 };
 
+// this hook has onGenerateTrip function which is calling generateTravelPlan that is hitting the backend API URL
+/**
+ *  Function: useCreateTrip 
+ *                  |- handleInputChange 
+ *                  |- onGenerateTrip -> generateTravelPlan()
+ */
 export const useCreateTrip = () => {
     const [formData, setFormData] = useState(initialFormData);
     const [loading, setLoading] = useState(false);

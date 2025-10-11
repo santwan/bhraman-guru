@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function HeaderActions({ onBack, onSave, saving }) {
+export default function HeaderActions({ onBack, onSave}) {
   return (
     <div className="flex items-center gap-3">
-      
+
       <button
         onClick={onBack}
         className="px-4 py-2  text-white transition-all duration-300 bg-amber-600 rounded hover:bg-amber-500/90 hover:scale-105"
@@ -12,14 +12,9 @@ export default function HeaderActions({ onBack, onSave, saving }) {
       </button>
       <button
         onClick={onSave}
-        disabled={saving}
-        className={`px-4 py-2 bg-green-600 hover:bg-green-500/90 transition-all duration-300 hover:scale-105 ${
-          saving
-            ? "bg-gray-300"
-            : "bg-primary-600 hover:bg-primary-700 text-white"
-        }`}
+        className={`px-4 py-2 bg-green-600 text-white hover:bg-green-500/90 transition-all duration-300 hover:scale-105 `}
       >
-        {saving ? "Saving..." : "Save Trip"}
+        Save Trip
       </button>
     </div>
   );

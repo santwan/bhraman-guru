@@ -180,7 +180,5 @@ export default function usePlanLoader(options = {}) {
     };
   }, [BATCH_SIZE, RETRIES, RETRY_DELAY_MS, FALLBACK_IMAGE, forceReplaceUnverified]);
 
-  const normalizedPlan = useMemo(() => (plan ? normalizePlan(plan) : null), [plan]);
-
-  return { plan, normalizedPlan, loading, setPlan };
+  return { plan, loading };
 }

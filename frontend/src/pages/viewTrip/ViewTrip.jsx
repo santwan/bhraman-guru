@@ -8,43 +8,15 @@ import HotelGrid from "@/components/my-trips/HotelGrid.jsx";
 import DailyItinerary from "@/components/my-trips/DailyItinerary.jsx";
 
 import usePlanLoader from "@/hooks/usePlanLoader.js";
-import useSaveTrip from "./useSaveTrip.js";
 
 import TabButton from "./TabButton.jsx";
 import HeaderActions from "./HeaderActions.jsx";
 import RawJson from "./RawJson.jsx";
 
-/**
- * ViewTrip page
- *
- * Responsibilities:
- *  - Load the trip plan from sessionStorage (via usePlanLoader)
- *  - Provide tabbed navigation for Overview / Hotels / Itinerary / Raw JSON
- *  - Trigger save flow (via useSaveTrip) which persists the plan to backend/firestore
- *  
- * Notes:
- *  - `usePlanLoader` returns both the original `plan` (the raw object loaded from sessionStorage)
- *    and a `normalizedPlan` (a safe copy / shape-normalized object ready for rendering).
- *    We intentionally prefer saving the raw `plan` because some hooks/components may mutate it
- *    in-place (e.g., writing fetched image URLs back to sessionStorage).
- *
- *  - Keep UI rendering deterministic: avoid any browser-only globals in render.
- *
- * @returns {JSX.Element}
- */
 export default function ViewTrip() {
   const navigate = useNavigate();
-  const { user } = useAuth();
 
-  // The hook now handles its own data loading from sessionStorage
-  // `plan` will be the original object parsed from sessionStorage and mutated in-place by the hook.
-  const { plan, normalizedPlan, loading } = usePlanLoader();
-  
-
-  // Save logic extracted
-  // Use the raw `plan` (not only normalizedPlan) to ensure the saved object includes in-place mutations
-  // (e.g. hotelImageUrl that were written back to sessionStorage).
-  const { saving, saveTrip } = useSaveTrip({ user, plan, navigate });
+  const { plan, loading } = usePlanLoader();
 
   const [tab, setTab] = useState("overview");
 
@@ -59,7 +31,7 @@ export default function ViewTrip() {
       </div>
     </div>
   )
-  if (!normalizedPlan) return (
+  if (!plan) return (
     <div className="min-h-screen">
       <div className="h-[100vh] flex justify-center items-center text-red-500">
         No trip plan to display. Please generate a trip first.
@@ -67,12 +39,10 @@ export default function ViewTrip() {
     </div>
   )
   
+  const { tripDetails = {}, hotelOptions = [], dailyItinerary = [] } = plan;
 
-  // defensive destructure with defaults
-  const { tripDetails = {}, hotelOptions = [], dailyItinerary = [] } = normalizedPlan;
-
-  const numDays = tripDetails.noOfDays ?? tripDetails.noOfDays === 0 ? tripDetails.noOfDays : null;
-  const numTravellers = tripDetails.numberOfTravelers ?? tripDetails.travelers ?? 1;
+  const numDays = tripDetails.noOfDays 
+  const numTravelers = tripDetails.numberOfTravelers 
 
   return (
     <div className="max-w-5xl pt-50 mx-auto px-4 md:pt-40 pb-10">
@@ -80,14 +50,13 @@ export default function ViewTrip() {
         <div>
           <h1 className="text-3xl font-bold">{tripDetails.destination || "Untitled Trip"}</h1>
           <p className="text-sm text-gray-500 mt-1">
-            {numDays ? `${numDays} day(s)` : null} {numDays ? " • " : ""}{numTravellers} traveler(s)
+            {numDays ? `${numDays} day(s)` : null} {numDays ? " • " : ""}{numTravelers} traveler(s)
           </p>
         </div>
 
         <HeaderActions
           onBack={() => navigate(-1)}
-          onSave={() => saveTrip()}
-          saving={saving}
+          onSave={() => useSaveTripToDB()}
         />
       </div>
 
@@ -120,7 +89,7 @@ export default function ViewTrip() {
           )
         )}
 
-        {tab === "raw" && <RawJson data={normalizedPlan} />}
+        {tab === "raw" && <RawJson data={plan} />}
       </div>
     </div>
   );
