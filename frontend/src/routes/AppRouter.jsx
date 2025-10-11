@@ -30,10 +30,10 @@ import { lazyWithMinDuration } from '@/utils/lazyWithMinDuration.js';
 // Pages are lazy-loaded for better performance
 const Home = lazyWithMinDuration(() => import('@/pages/home/Home.jsx'))
 const CreateTrip = lazyWithMinDuration(() => import('@/pages/createTrip/CreateTrip.jsx'))
-const MyTrips = lazyWithMinDuration(() => import('@/pages/MyTrips.jsx'))
-const TripHistory = lazyWithMinDuration(() => import('@/pages/TripHistory.jsx'))
+const MyTrips = lazyWithMinDuration(() => import('@/pages/myTrip/MyTrips.jsx'))
+const TripHistory = lazyWithMinDuration(() => import('@/pages/tripHistory/TripHistory.jsx'))
 const ViewTrip = lazyWithMinDuration(() => import('@/pages/viewTrip/ViewTrip.jsx'))
-const Profile = lazyWithMinDuration(() => import('@/pages/Profile.jsx'))
+const Profile = lazyWithMinDuration(() => import('@/pages/profile/Profile.jsx'))
 const Auth = lazyWithMinDuration(() => import('@/components/auth/Auth.jsx')) // Auth Modal component
 
 /**
