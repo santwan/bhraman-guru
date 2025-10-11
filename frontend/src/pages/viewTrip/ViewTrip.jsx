@@ -1,9 +1,7 @@
-// src/pages/ViewTrip/index.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/auth";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-
 
 import TripOverview from "@/components/my-trips/TripOverview.jsx";
 import HotelGrid from "@/components/my-trips/HotelGrid.jsx";
@@ -17,7 +15,22 @@ import HeaderActions from "./HeaderActions.jsx";
 import RawJson from "./RawJson.jsx";
 
 /**
- * Entry: ViewTrip page (small & readable)
+ * ViewTrip page
+ *
+ * Responsibilities:
+ *  - Load the trip plan from sessionStorage (via usePlanLoader)
+ *  - Provide tabbed navigation for Overview / Hotels / Itinerary / Raw JSON
+ *  - Trigger save flow (via useSaveTrip) which persists the plan to backend/firestore
+ *  
+ * Notes:
+ *  - `usePlanLoader` returns both the original `plan` (the raw object loaded from sessionStorage)
+ *    and a `normalizedPlan` (a safe copy / shape-normalized object ready for rendering).
+ *    We intentionally prefer saving the raw `plan` because some hooks/components may mutate it
+ *    in-place (e.g., writing fetched image URLs back to sessionStorage).
+ *
+ *  - Keep UI rendering deterministic: avoid any browser-only globals in render.
+ *
+ * @returns {JSX.Element}
  */
 export default function ViewTrip() {
   const navigate = useNavigate();
@@ -46,7 +59,14 @@ export default function ViewTrip() {
       </div>
     </div>
   )
-  if (!normalizedPlan) return <p className="p-4 text-red-500">No trip plan to display. Please generate a trip first.</p>;
+  if (!normalizedPlan) return (
+    <div className="min-h-screen">
+      <div className="h-[100vh] flex justify-center items-center text-red-500">
+        No trip plan to display. Please generate a trip first.
+      </div>;
+    </div>
+  )
+  
 
   // defensive destructure with defaults
   const { tripDetails = {}, hotelOptions = [], dailyItinerary = [] } = normalizedPlan;

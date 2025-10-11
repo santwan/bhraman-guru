@@ -1,4 +1,4 @@
-// src/pages/ViewTrip/hooks/useSaveTrip.js
+
 import { useState } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/firebase/firebaseConfig";
